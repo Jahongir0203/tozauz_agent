@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Future.delayed(const Duration(seconds: 2), () async {
       final doubleCheck = await connectivity.checkConnectivity();
-      Navigator.pushReplacementNamed(context, AppRoutes.mainUserMainScreen);
+      // Navigator.pushReplacementNamed(context, AppRoutes.mainUserMainScreen);
       //
       // if (mounted) {
       //   // Ensure the widget is still in the tree
