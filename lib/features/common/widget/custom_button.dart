@@ -52,13 +52,13 @@ class CustomButton extends StatelessWidget {
         borderRadius: radius ?? BorderRadius.circular(10),
         onTap: onTap,
         child: Ink(
-          height: height ?? he(50),
+          height: height ?? he(40),
           padding: EdgeInsets.symmetric(
               vertical: isLoading ? he(8) : paddingV ?? he(10),
               horizontal: wi(8)),
           decoration: BoxDecoration(
               borderRadius: radius ?? BorderRadius.circular(10),
-              border: Border.all(color: borderColor ?? AppColors.grey3),
+              border: Border.all(color: borderColor ?? AppColors.transparent),
               color: bgColor ?? AppColors.primaryColor),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,

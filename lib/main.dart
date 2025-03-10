@@ -1,6 +1,8 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart'
     show ScreenUtil, ScreenUtilInit;
+import 'package:provider/provider.dart';
+import 'core/values/theme_notifier.dart';
 import 'export.dart';
 
 Future<void> main() async {
@@ -8,7 +10,15 @@ Future<void> main() async {
 
   await initDi();
 
-  runApp(const MyApp());
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => inject<AuthCubit>()),
+        ChangeNotifierProvider(create: (_) => ThemeNotifier(Brightness.light)),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -19,54 +29,51 @@ class MyApp extends StatelessWidget {
     SizeConfig().init(context);
     ScreenUtil.init(context);
 
+    themeNotifier = Provider.of<ThemeNotifier>(context);
+
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => inject<AuthCubit>()),
-      ],
-      child: ScreenUtilInit(
-          minTextAdapt: true,
-          designSize: Size(
-            MediaQuery.of(context).size.width,
-            MediaQuery.of(context).size.height,
-          ),
-          builder: (context, child) {
-            return GestureDetector(
-              onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-              child: MediaQuery(
-                data: MediaQuery.of(context).copyWith(
-                  textScaler: const TextScaler.linear(1),
-                ),
-                child: MaterialApp(
-                  debugShowCheckedModeBanner: false,
-                  title: 'Tips',
-                  theme: appThemeData,
-                  // locale: Locale(state.language),
-                  // localizationsDelegates: const [
-                  //   GlobalMaterialLocalizations.delegate,
-                  //   GlobalWidgetsLocalizations.delegate,
-                  //   GlobalCupertinoLocalizations.delegate,
-                  //   S.delegate
-                  // ],
-                  // supportedLocales: const [
-                  //   Locale('en'),
-                  //   Locale('ru'),
-                  //   Locale('uz'),
-                  // ],
-                  onGenerateRoute: RouteGenerate().generate,
-                  navigatorKey: navigatorKey,
-                  builder: (context, child) {
-                    return ScrollConfiguration(
-                        behavior: MyBehavior(), child: child!);
-                  },
-                  initialRoute: AppRoutes.splashScreen,
-                  // home: CustomLeftDrawerWithoutIcon(),
-                ),
+    return ScreenUtilInit(
+        minTextAdapt: true,
+        designSize: Size(
+          MediaQuery.of(context).size.width,
+          MediaQuery.of(context).size.height,
+        ),
+        builder: (context, child) {
+          return GestureDetector(
+            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+            child: MediaQuery(
+              data: MediaQuery.of(context).copyWith(
+                textScaler: const TextScaler.linear(1),
               ),
-            );
-          }),
-    );
+              child: MaterialApp(
+                debugShowCheckedModeBanner: false,
+                title: 'Tips',
+                theme: appThemeData,
+                // locale: Locale(state.language),
+                // localizationsDelegates: const [
+                //   GlobalMaterialLocalizations.delegate,
+                //   GlobalWidgetsLocalizations.delegate,
+                //   GlobalCupertinoLocalizations.delegate,
+                //   S.delegate
+                // ],
+                // supportedLocales: const [
+                //   Locale('en'),
+                //   Locale('ru'),
+                //   Locale('uz'),
+                // ],
+                onGenerateRoute: RouteGenerate().generate,
+                navigatorKey: navigatorKey,
+                builder: (context, child) {
+                  return ScrollConfiguration(
+                      behavior: MyBehavior(), child: child!);
+                },
+                initialRoute: AppRoutes.splashScreen,
+                // home: CustomLeftDrawerWithoutIcon(),
+              ),
+            ),
+          );
+        });
   }
 }
 
