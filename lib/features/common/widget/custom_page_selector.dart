@@ -54,13 +54,15 @@ class CustomPageSelector extends StatelessWidget {
         ),
         ...getPagesToShow().map((page) {
           final bool isActive = page == currentPage;
-          return IconButton(
-            onPressed: () => onPageChanged(page),
-            icon: Text(
-              "$page",
-              style: context.theme.textTheme.bodyMedium?.copyWith(
-                color: isActive ? AppColors.primaryColor : AppColors.black,
-                fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+          return Expanded(
+            child: IconButton(
+              onPressed: () => onPageChanged(page),
+              icon: Text(
+                "$page",
+                style: context.theme.textTheme.bodyMedium?.copyWith(
+                  color: isActive ? AppColors.primaryColor : AppColors.black,
+                  fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+                ),
               ),
             ),
           );
