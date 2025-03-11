@@ -1,8 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tozauz_agent/core/extension/for_context.dart';
-import 'package:tozauz_agent/core/extension/widget_extantion.dart';
-import 'package:tozauz_agent/core/values/app_colors.dart';
 import 'package:tozauz_agent/export.dart';
 import 'package:tozauz_agent/features/common/widget/app_text_style.dart';
 import 'package:tozauz_agent/features/common/widget/custom_app_bar.dart';
@@ -51,6 +48,7 @@ class _ReportsScreenState extends State<ReportsScreen>
         controller: _tabController,
         children: [
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
                 width: context.w,
@@ -68,47 +66,63 @@ class _ReportsScreenState extends State<ReportsScreen>
                 "Konterlar soni: ",
                 style: AppTextStyles().body16w6,
               ),
-              SizedBox(
-                height: 40.h,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                              color: AppColors.grey2,
-                            ),
-                            borderRadius: BorderRadius.circular(10.r)),
-                        child: Icon(
-                          Icons.remove,
-                        ),
-                      ).paddingAll(20.sp),
-                    ), Expanded(
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                              color: AppColors.grey2,
-                            ),
-                            borderRadius: BorderRadius.circular(10.r)),
-                        child: Icon(
-                          Icons.remove,
-                        ),
-                      ).paddingAll(20.sp),
+              10.verticalSpace,
+              Row(
+                spacing: 10.w,
+                children: [
+                  Expanded(
+                    child: IconButton.filled(
+                      style: IconButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.r)
+                          )
+                      ),
+                      onPressed: () {
+                        if(containerCount > 1){
+                          setState(() {
+                            containerCount--;
+                          });
+                        }
+
+                      },
+                      icon: Icon(
+                        Icons.add,
+                      ).paddingAll(9.sp),
                     ),
-                    Expanded(
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                              color: AppColors.grey2,
-                            ),
-                            borderRadius: BorderRadius.circular(10.r)),
-                        child: Icon(
-                          Icons.add,
-                        ),
-                      ).paddingAll(20.sp),
-                    )
-                  ],
-                ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                            color: AppColors.grey2,
+                          ),
+                          borderRadius: BorderRadius.circular(10.r)),
+                      child: Text(
+                        containerCount.toString(),
+                        textAlign: TextAlign.center,
+                        style: AppTextStyles().body20w6,
+                      ).paddingAll(16.sp),
+                    ),
+                  ),
+                  Expanded(
+                    child: IconButton.filled(
+                      style: IconButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.r)
+                        )
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          containerCount++;
+                        });
+                      },
+                      icon: Icon(
+                        Icons.add,
+                      ).paddingAll(9.sp),
+                    ),
+                  ),
+                ],
               ),
               30.verticalSpace,
               DecoratedBox(
@@ -127,8 +141,8 @@ class _ReportsScreenState extends State<ReportsScreen>
                     ),
                     10.verticalSpace,
                     TitleWithRow(
-                      title: "Kontainer somi",
-                      value: "1 ta",
+                      title: "Kontainer soni",
+                      value: "$containerCount ta",
                     ),
                     10.verticalSpace,
                     Text(
@@ -157,14 +171,15 @@ class _ReportsScreenState extends State<ReportsScreen>
                         });
                       },
                     ),
-                    20.verticalSpace,
-                    CustomButton(
-                      text: "Ariza yuborish",
-                      onTap: () {},
-                    )
+
                   ],
                 ).paddingAll(24.sp),
-              )
+              ),
+              20.verticalSpace,
+              CustomButton(
+                text: "Ariza yuborish",
+                onTap: () {},
+              ),
             ],
           ).paddingSymmetric(horizontal: 16.w, vertical: 20.h),
           Center(child: Text("Arizalar ro'yxati")),
