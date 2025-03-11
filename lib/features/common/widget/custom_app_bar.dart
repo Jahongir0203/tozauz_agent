@@ -55,13 +55,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             .bodyLarge
             ?.copyWith(color: AppColors.primaryColor),
       ),
-      leading: leftIcon != null
-          ? ScaleButton(
-                  bound: 0.040,
-                  onTap: leftOnTap,
-                  child: SvgPicture.asset(leftIcon ?? AppIcons.noImg))
-              .paddingAll(14)
-          : const SizedBox.shrink(),
+      // leading: leftIcon != null
+      //     ? ScaleButton(
+      //             bound: 0.040,
+      //             onTap: leftOnTap,
+      //             child: SvgPicture.asset(leftIcon ?? AppIcons.noImg))
+      //         .paddingAll(14)
+      //     : const SizedBox.shrink(),
+
       actions: action ??
           [
             rightIcon != null

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:tozauz_agent/features/home/presentation/pages/container_detail.dart';
 import 'package:tozauz_agent/features/main_screen.dart';
 import 'package:tozauz_agent/features/onboarding/splash/splash_screen.dart';
 
@@ -18,6 +19,8 @@ class RouteGenerate {
         return simpleRoute(const NoInternetScreen());
       case AppRoutes.mainScreen:
         return simpleRoute(const MainScreen());
+      case AppRoutes.containerDetailScreen:
+        return simpleRoute(const ContainerDetailScreen());
     }
     return null;
   }

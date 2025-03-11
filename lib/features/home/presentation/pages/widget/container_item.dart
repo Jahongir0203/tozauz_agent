@@ -7,52 +7,61 @@ import 'package:tozauz_agent/features/home/presentation/pages/widget/title_with_
 
 class ContainerItem extends StatelessWidget {
   final ContainerModel model;
+  final Function() onTap;
 
-  const ContainerItem({super.key, required this.model});
+  const ContainerItem({super.key, required this.model, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.r),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            // spreadRadius: 1,
-            blurRadius: 10,
-            offset: const Offset(0, 0),
-          )
-        ],
-        color: AppColors.white,
+    return Material(
+      child: InkWell(
+        onTap: onTap,
+        splashColor: AppColors.primaryOpacity,
+        hoverColor: AppColors.primaryOpacity,
+        highlightColor: AppColors.primaryOpacity,
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10.r),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                // spreadRadius: 1,
+                blurRadius: 10,
+                offset: const Offset(0, 0),
+              )
+            ],
+            color: AppColors.white,
+          ),
+          child: Column(
+            children: [
+              TitleWithRow(
+                title: 'Doramad: ',
+                value: model.daromad,
+              ),
+              TitleWithRow(
+                title: 'Oxirgi bo‘shatish: ',
+                value: "${model.price}/${model.currency}",
+              ),
+              TitleWithRow(
+                title: 'Narxi: ',
+                value: "${model.price}/${model.currency}",
+              ),
+              TitleWithRow(
+                title: 'Holati: ',
+                value: model.status == 1 ? "Activ" : "Aktiv emas",
+              ),
+              TitleWithRow(
+                title: 'Sim module: ',
+                value: model.simModul,
+              ),
+              TitleWithRow(
+                title: 'Manzil: ',
+                value: model.address,
+              ),
+            ],
+          ).paddingAll(24.sp),
+        ),
       ),
-      child: Column(
-        children: [
-          TitleWithRow(
-            title: 'Doramad: ',
-            value: model.daromad,
-          ),
-          TitleWithRow(
-            title: 'Oxirgi bo‘shatish: ',
-            value: "${model.price}/${model.currency}",
-          ),
-          TitleWithRow(
-            title: 'Narxi: ',
-            value: "${model.price}/${model.currency}",
-          ),
-          TitleWithRow(
-            title: 'Holati: ',
-            value: model.status == 1 ? "Activ" : "Aktiv emas",
-          ),
-          TitleWithRow(
-            title: 'Sim module: ',
-            value: model.simModul,
-          ),
-          TitleWithRow(
-            title: 'Manzil: ',
-            value: model.address,
-          ),
-        ],
-      ).paddingAll(24.sp),
     );
   }
 }
