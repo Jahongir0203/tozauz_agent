@@ -5,10 +5,9 @@ import 'package:tozauz_agent/export.dart';
 import 'package:tozauz_agent/features/common/widget/app_text_style.dart';
 import 'package:tozauz_agent/features/home/presentation/pages/widget/title_with_row.dart';
 
-class ContainerIncomeBottomSheet extends StatelessWidget {
-  final String? title;
+class PaymentHistoryBottomSheet extends StatelessWidget {
 
-  const ContainerIncomeBottomSheet({super.key, this.title});
+  const PaymentHistoryBottomSheet({super.key,});
 
   @override
   Widget build(BuildContext context) {
@@ -19,33 +18,25 @@ class ContainerIncomeBottomSheet extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Daromat tafsilotlari",
+          "Pul so'rovi tarixi",
           style: AppTextStyles().body16w6,
         ),
         10.verticalSpace,
         TitleWithRow(
-          title: 'Foydalanuvchi: ',
-          value: "Ulug'bek",
+          title: 'Amount: ',
+          value: "UZS 100",
         ),
         TitleWithRow(
-          title: 'Miqdor: ',
-          value: "UZS 750",
+          title: 'Status: ',
+          value: "Tasdiqlangan",
         ),
         TitleWithRow(
-          title: 'Sana: ',
+          title: 'Card number: ',
+          value: "1123 2344 4566 4566",
+        ),
+        TitleWithRow(
+          title: 'Date: ',
           value: DateTime.now().toDateFormat(),
-        ),
-        TitleWithRow(
-          title: 'Tarif: ',
-          value: "Baklashka 10 l",
-        ),
-        TitleWithRow(
-          title: 'Telefon raqam: ',
-          value: "+998901234567".formatUzPhoneNumber(),
-        ),
-        TitleWithRow(
-          title: 'ID: ',
-          value: "112344",
         ),
         20.verticalSpace,
         CustomButton(
