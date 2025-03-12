@@ -29,10 +29,14 @@ class _LoginScreenState extends State<LoginScreen> {
   String? _validatePhone(String? value) {
     if (value == null || value.isEmpty) {
       return "Telefon raqamini kiriting";
-    } else if (!RegExp(r'^\+?\d{10,13}$').hasMatch(value)) {
+    }
+    String digitsOnly = value.replaceAll(RegExp(r'\D'), ''); // Faqat raqamlarni olish
+
+    if (!digitsOnly.startsWith('998') || digitsOnly.length != 12) {
       return "Yaroqli telefon raqamini kiriting";
     }
-    return null;
+
+    return null; // Hammasi to‘g‘ri bo‘lsa, xatolik qaytarmaydi
   }
 
   String? _validatePassword(String? value) {
@@ -111,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       onTap: () async {
                         if (_formKey.currentState!.validate()) {
                           await cubit.login(
-                            username: phoneController.text,
+                            username: "+${phoneController.text.replaceAll(RegExp(r'\D'), '')}",
                             password: passwordController.text,
                           );
                         }
