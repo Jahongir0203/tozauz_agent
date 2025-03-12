@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         ),
         builder: (context, child) {
           return GestureDetector(
-            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+            onTap: () => FocusManager.instance.primaryFocus?.unfocus,
             child: MediaQuery(
               data: MediaQuery.of(context).copyWith(
                 textScaler: const TextScaler.linear(1),

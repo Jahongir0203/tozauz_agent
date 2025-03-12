@@ -1,6 +1,4 @@
-
 import '../../../export.dart';
-
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
@@ -50,7 +48,7 @@ class CustomButton extends StatelessWidget {
         // highlightColor: AppColors.transparent,
         hoverColor: AppColors.transparent,
         borderRadius: radius ?? BorderRadius.circular(10),
-        onTap: onTap,
+        onTap: isLoading ? () {} : onTap,
         child: Ink(
           height: height ?? he(40),
           padding: EdgeInsets.symmetric(

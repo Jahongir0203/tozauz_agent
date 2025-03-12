@@ -1,10 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:tozauz_agent/features/home/presentation/pages/container_detail.dart';
-import 'package:tozauz_agent/features/main_screen.dart';
-import 'package:tozauz_agent/features/onboarding/splash/splash_screen.dart';
-
-import '../../features/onboarding/no_internet/no_internet_screen.dart';
-import 'app_routes.dart';
+import '../../export.dart';
 
 class RouteGenerate {
   Route? generate(RouteSettings settings) {
@@ -21,6 +16,8 @@ class RouteGenerate {
         return simpleRoute(const MainScreen());
       case AppRoutes.containerDetailScreen:
         return simpleRoute(const ContainerDetailScreen());
+        case AppRoutes.loginScreen:
+        return simpleRoute(const LoginScreen());
     }
     return null;
   }

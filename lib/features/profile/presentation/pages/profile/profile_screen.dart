@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tozauz_agent/core/extension/number_formatter.dart';
 import 'package:tozauz_agent/core/extension/widget_extantion.dart';
+import 'package:tozauz_agent/core/routes/app_routes.dart';
 import 'package:tozauz_agent/core/utils/helper_widget.dart';
 import 'package:tozauz_agent/core/values/app_colors.dart';
-import 'package:tozauz_agent/features/common/widget/app_text_style.dart';
 import 'package:tozauz_agent/features/common/widget/custom_app_bar.dart';
 import 'package:tozauz_agent/features/profile/presentation/pages/profile/widget/profile_item.dart';
 
@@ -36,7 +36,13 @@ class ProfileScreen extends StatelessWidget {
         icon: Icons.logout,
         title: "Logout",
         value: "",
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            AppRoutes.loginScreen,
+            (_) => false,
+          );
+        },
       ),
     ];
 
@@ -52,7 +58,7 @@ class ProfileScreen extends StatelessWidget {
                 radius: 50.r,
                 backgroundColor: AppColors.primaryOpacity,
                 child: Text(
-                  "R",
+                  "UB",
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
               ),

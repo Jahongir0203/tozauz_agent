@@ -8,7 +8,7 @@ import 'package:tozauz_agent/core/extension/widget_extantion.dart';
 import 'package:tozauz_agent/core/utils/size_config.dart' show he;
 import 'package:tozauz_agent/core/values/app_colors.dart' show AppColors;
 
-class CustomTextField extends StatelessWidget {
+class CustomTextField extends StatefulWidget {
   CustomTextField({
     super.key,
     this.onChange,
@@ -62,82 +62,103 @@ class CustomTextField extends StatelessWidget {
   final String? labelText;
 
   @override
+  State<CustomTextField> createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+  late bool isObscured;
+
+  @override
+  void initState() {
+    super.initState();
+    isObscured = widget.obscure ?? false;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (labelText != null) ...[
+        if (widget.labelText != null) ...[
           Text(
-            labelText!,
+            widget.labelText!,
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: AppColors.black,
-                  fontSize: 12.sp,
-                ),
+              color: AppColors.black,
+              fontSize: 12.sp,
+            ),
           ),
           5.verticalSpace
         ],
         TextFormField(
-          maxLines: maxLines ?? 1,
-          minLines: minLines ?? 1,
-          validator: validator,
-          readOnly: readOnly,
-          focusNode: focusNode,
-          inputFormatters: formatter,
-          onTap: onTap,
-          onFieldSubmitted: onFieldSubmitted,
-          initialValue: initialValue,
+          maxLines: widget.obscure == true ? 1 : widget.maxLines ?? 1,
+          minLines: widget.minLines ?? 1,
+          validator: widget.validator,
+          readOnly: widget.readOnly,
+          focusNode: widget.focusNode,
+          inputFormatters: widget.formatter,
+          onTap: widget.onTap,
+          onFieldSubmitted: widget.onFieldSubmitted,
+          initialValue: widget.initialValue,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: AppColors.black,
-                // fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
-          obscureText: obscure ?? false,
-          textInputAction: textInputAction,
-          keyboardType: textInputType,
-          onChanged: onChange,
-          controller: textEditingController,
+            color: AppColors.black,
+            fontWeight: FontWeight.w400,
+          ),
+          obscureText: isObscured,
+          textInputAction: widget.textInputAction,
+          keyboardType: widget.textInputType,
+          onChanged: widget.onChange,
+          controller: widget.textEditingController,
           cursorColor: AppColors.primaryColor,
-          maxLength: maxLength,
+          maxLength: widget.maxLength,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
-            hintText: hintText,
+            hintText: widget.hintText,
             hintStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: AppColors.grey3,
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w400,
-                ),
-            counterText: '',
-            // labelStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
-            //       color: AppColors.grey3,
-            //       fontSize: 14.sp,
-            //       fontWeight: FontWeight.w400,
-            //     ),
-
+              color: AppColors.grey3,
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w400,
+            ),
             contentPadding: EdgeInsets.symmetric(horizontal: 8.h),
             suffixIconConstraints:
-                const BoxConstraints(minHeight: 25, minWidth: 25),
-            prefixIcon: prefixIcon == null
+            const BoxConstraints(minHeight: 25, minWidth: 25),
+            prefixIcon: widget.prefixIcon == null
                 ? null
                 : SvgPicture.asset(
-                    prefixIcon ?? "",
-                    height: he(20),
-                    colorFilter: ColorFilter.mode(
-                        preIconColor ?? AppColors.grey1, BlendMode.srcIn),
-                  ).paddingAll(11),
-            suffixIcon: suffixIcon == null
+              widget.prefixIcon!,
+              height: he(20),
+              colorFilter: ColorFilter.mode(
+                  widget.preIconColor ?? AppColors.grey1,
+                  BlendMode.srcIn),
+            ).paddingAll(11),
+
+            // **Ko‘zcha ikonasi orqali ko'rinishni o'zgartirish**
+            suffixIcon: widget.obscure == true
+                ? IconButton(
+              onPressed: () {
+                setState(() {
+                  isObscured = !isObscured;
+                });
+              },
+              color: AppColors.black,
+              icon: Icon(
+                isObscured ? Icons.visibility_off : Icons.visibility,
+              ),
+            )
+                : (widget.suffixIcon == null
                 ? null
                 : ScaleButton(
-                    bound: 0.040,
-                    onTap: suffixIconOnTap,
-                    child: SvgPicture.asset(
-                      suffixIcon ?? "",
-                      height: he(20),
-                      colorFilter: ColorFilter.mode(
-                          preIconColor ?? AppColors.grey1, BlendMode.srcIn),
-                    ),
-                  ).paddingAll(11),
+              bound: 0.040,
+              onTap: widget.suffixIconOnTap,
+              child: SvgPicture.asset(
+                widget.suffixIcon!,
+                height: he(20),
+                colorFilter: ColorFilter.mode(
+                    widget.preIconColor ?? AppColors.grey1,
+                    BlendMode.srcIn),
+              ),
+            ).paddingAll(11)),
             filled: true,
-            fillColor: fillColor ?? Colors.white,
+            fillColor: widget.fillColor ?? Colors.white,
             border: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(10)),
               borderSide: BorderSide(color: AppColors.grey2),
@@ -149,7 +170,7 @@ class CustomTextField extends StatelessWidget {
             focusedBorder: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(10)),
               borderSide: BorderSide(
-                color: borderColor ?? AppColors.primaryColor,
+                color: widget.borderColor ?? AppColors.primaryColor,
                 width: 1.2,
               ),
             ),
@@ -167,3 +188,4 @@ class CustomTextField extends StatelessWidget {
     );
   }
 }
+

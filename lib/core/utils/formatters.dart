@@ -12,7 +12,7 @@ class Formatters {
   );
 
   static final phoneFormatter = MaskTextInputFormatter(
-    mask: '(##) ### ## ##',
+    mask: '+998 (##) ### ## ##',
     filter: {"#": RegExp(r'[0-9]')},
   );
 }

@@ -6,6 +6,7 @@ class AppRoutes {
   static const String mainScreen = "mainScreen";
   static const String noInternet = "noInternet";
   static const String containerDetailScreen = "ContainerDetailScreen";
+  static const String loginScreen = "LoginScreen";
 
 
 }

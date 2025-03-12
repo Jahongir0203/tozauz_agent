@@ -45,5 +45,11 @@ export 'package:flutter/material.dart';
 export 'package:flutter_svg/flutter_svg.dart';
 export 'package:tozauz_agent/core/extension/widget_extantion.dart';
 export 'package:tozauz_agent/core/values/app_colors.dart';
+export 'package:tozauz_agent/features/home/presentation/pages/container_detail.dart';
+export 'package:tozauz_agent/features/main_screen.dart';
+export 'package:tozauz_agent/features/onboarding/login/login_screen.dart';
+export 'package:tozauz_agent/features/onboarding/splash/splash_screen.dart';
+
+export '../../features/onboarding/no_internet/no_internet_screen.dart';
 
 export '../../../../../core/values/app_assets.dart' show AppIcons;
