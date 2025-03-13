@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tozauz_agent/core/extension/for_context.dart';
 import 'package:tozauz_agent/core/utils/formatters.dart';
@@ -8,7 +7,6 @@ import 'package:tozauz_agent/features/common/widget/custom_app_bar.dart';
 import 'package:tozauz_agent/features/common/widget/text_field_widget.dart';
 import 'package:tozauz_agent/features/payment/presentation/cubit/payment_cubit.dart';
 import 'package:tozauz_agent/features/payment/presentation/pages/payment/payment_history.dart';
-
 import '../../../../../core/values/app_strings.dart';
 
 class PaymentScreen extends StatefulWidget {
@@ -72,6 +70,7 @@ class _PaymentScreenState extends State<PaymentScreen>
         ),
       ),
       body: TabBarView(
+        clipBehavior: Clip.none,
         controller: _tabController,
         children: [
           BlocBuilder<PaymentCubit, PaymentState>(

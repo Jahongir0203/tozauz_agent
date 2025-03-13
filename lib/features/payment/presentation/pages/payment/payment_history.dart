@@ -26,42 +26,54 @@ class _PaymentHistoryState extends State<PaymentHistory> {
           child: ListView.separated(
             itemBuilder: (context, index) {
               var model = state.archivePaymentList[index];
-              return InkWell(
+              return GestureDetector(
+
                 onTap: () {
                   PaymentHistoryBottomSheet().show(context);
                 },
-                splashColor: AppColors.primaryOpacity,
-                hoverColor: AppColors.primaryOpacity,
-                highlightColor: AppColors.primaryOpacity,
-                child: Row(
-                  children: [
-                    Text(
-                      model.card?.cardFormatter() ?? '',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    Spacer(),
-                    Column(
-                      children: [
-                        Text(
-                          "UZS ${model.amount}",
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                        DecoratedBox(
-                          decoration: BoxDecoration(
-                              color: AppColors.orange,
-                              borderRadius: BorderRadius.circular(5.r)),
-                          child: Text(
-                            "Kutilmoqda",
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall
-                                ?.copyWith(color: AppColors.white),
-                          ).paddingAll(5.sp),
-                        ),
-                      ],
-                    ),
-                  ],
-                ).paddingAll(16.sp),
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: AppColors.white,
+                    borderRadius: BorderRadius.circular(10.r),
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.black.withOpacity(0.2),
+                        blurRadius: 10.r,
+                        // spreadRadius: ,
+                        offset: const Offset(0, 0),
+                      ),
+                    ]
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        model.card?.cardFormatter() ?? '',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      Spacer(),
+                      Column(
+                        children: [
+                          Text(
+                            "UZS ${model.amount}",
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                          DecoratedBox(
+                            decoration: BoxDecoration(
+                                color: AppColors.orange,
+                                borderRadius: BorderRadius.circular(5.r)),
+                            child: Text(
+                              "Kutilmoqda",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
+                                  ?.copyWith(color: AppColors.white),
+                            ).paddingAll(5.sp),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ).paddingAll(16.sp),
+                ),
               );
             },
             separatorBuilder: (context, index) {
