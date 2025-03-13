@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
               ),
               child: MaterialApp(
                 debugShowCheckedModeBanner: false,
-                title: 'Tips',
+                title: 'TozaUz Agent',
                 theme: appThemeData,
                 // locale: Locale(state.language),
                 // localizationsDelegates: const [

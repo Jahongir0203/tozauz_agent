@@ -4,8 +4,6 @@ class AppIcons {
   static const String baseUrl = 'assets/icons';
   static const String icNews = 'assets/icons/ic_news.svg';
 
-
-  static const String appLogo = '$baseUrl/logo.svg';
   static const String commentSuccess = '$baseUrl/five-stars-thumbs-up-icon 1.svg';
   static const String successTick = '$baseUrl/charm_circle-tick.svg';
   static const String chartIcon = '$baseUrl/chart-icon 2.svg';
@@ -33,4 +31,5 @@ class AppImages {
   static const String paypalLogo = 'assets/icons/paypal.png';
   static const String googlePayLogo = 'assets/icons/google_pay.png';
   static const String applePayLogo = 'assets/icons/apple_pay.png';
+  static const String appLogo = 'assets/images/app_logo.png';
 }
