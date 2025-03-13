@@ -21,20 +21,28 @@ class ContainerDetailScreen extends StatefulWidget {
 }
 
 class _ContainerDetailScreenState extends State<ContainerDetailScreen> {
-  int currentPage = 0;
+  int currentPage = 1;
 
   DateRange? selectedDateRange;
   bool doubleMonth = false;
+
+  late EarningFilterModel filter;
+
+  @override
+  void initState() {
+    filter = EarningFilterModel(
+      page: 1,
+      id: widget.id,
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => inject<ContainerCubit>()
         ..fetchEarning(
-          EarningFilterModel(
-            page: 1,
-            id: widget.id,
-          ),
+          filter,
         ),
       child: Scaffold(
         appBar: CustomAppBar(
@@ -72,6 +80,7 @@ class _ContainerDetailScreenState extends State<ContainerDetailScreen> {
             16.verticalSpace,
             BlocBuilder<ContainerCubit, ContainerState>(
               builder: (context, state) {
+                var cubit = context.read<ContainerCubit>();
                 if (state.earningListStatus == Status.LOADING) {
                   return LoadingWidget();
                 } else if (state.earningListStatus == Status.ERROR) {
@@ -86,58 +95,77 @@ class _ContainerDetailScreenState extends State<ContainerDetailScreen> {
                       CustomButton(
                         text: "Qayta yuklash",
                         onTap: () {
-                          context.read<ContainerCubit>().fetchBoxes();
+                          cubit.fetchEarning(filter.copyWith(page: 1));
                         },
                       ),
                     ],
                   );
                 }
-
-                return ListView.separated(
-                  shrinkWrap: true,
-                  physics: AlwaysScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return ContainerDetailListItem(
-                      onTap: () {
-                        ContainerIncomeBottomSheet(
-                          mode: state.earningList[index],
-                        ).show(context);
-                      },
-                      model: state.earningList[index],
-                    );
+                return RefreshIndicator(
+                  onRefresh: () async {
+                    return cubit.fetchEarning(filter);
                   },
-                  separatorBuilder: (context, index) {
-                    return customDivider;
-                  },
-                  itemCount: state.earningList.length,
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    physics: AlwaysScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return ContainerDetailListItem(
+                        onTap: () {
+                          ContainerIncomeBottomSheet(
+                            mode: state.earningList[index],
+                          ).show(context);
+                        },
+                        model: state.earningList[index],
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return customDivider;
+                    },
+                    itemCount: state.earningList.length,
+                  ),
                 );
               },
             ),
             16.verticalSpace,
             Spacer(),
-            CustomPageSelector(
-              currentPage: currentPage,
-              maxPage: (7).ceil(),
-              minPage: 1,
-              onNextPage: () {
-                if (currentPage < (10).ceil()) {
-                  setState(() {
-                    currentPage++;
-                  });
-                }
-              },
-              onPrevPage: () {
-                if (currentPage >= 1) {
-                  setState(() {
-                    currentPage--;
-                  });
-                }
-              },
-              onPageChanged: (int index) {
-                setState(() {
-                  currentPage = index;
-                });
-              },
+            Visibility(
+              visible: false,
+              child: BlocBuilder<ContainerCubit, ContainerState>(
+                builder: (context, state) {
+                  var cubit = context.read<ContainerCubit>();
+
+                  return CustomPageSelector(
+                    currentPage: currentPage,
+                    maxPage: (state.earningList.length).ceil(),
+                    minPage: 1,
+                    onNextPage: () async {
+                      if (currentPage < (state.earningList.length).ceil()) {
+                        setState(() {
+                          currentPage++;
+                        });
+                        await cubit
+                            .fetchEarning(filter.copyWith(page: currentPage));
+                      }
+                    },
+                    onPrevPage: () async {
+                      if (currentPage >= 1) {
+                        setState(() {
+                          currentPage--;
+                        });
+                        await cubit
+                            .fetchEarning(filter.copyWith(page: currentPage));
+                      }
+                    },
+                    onPageChanged: (int index) async {
+                      setState(() {
+                        currentPage = index;
+                      });
+                      await cubit
+                          .fetchEarning(filter.copyWith(page: currentPage));
+                    },
+                  );
+                },
+              ),
             ),
             SizedBox(
               height: customButtonPadding,

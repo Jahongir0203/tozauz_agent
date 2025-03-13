@@ -19,26 +19,30 @@ class ContainerCubit extends Cubit<ContainerState> {
     emit(state.copyWith(boxListStatus: Status.LOADING));
     final response = await repository.fetchBoxes();
     response.fold(
-          (failure) =>
-          emit(state.copyWith(
-              boxListStatus: Status.ERROR, boxListFailure: failure),),
-          (boxes) =>
-          emit(state.copyWith(boxListStatus: Status.SUCCESS, boxList: boxes),
-          ),
+      (failure) => emit(
+        state.copyWith(boxListStatus: Status.ERROR, boxListFailure: failure),
+      ),
+      (boxes) => emit(
+        state.copyWith(boxListStatus: Status.SUCCESS, boxList: boxes),
+      ),
     );
-
   }
 
   Future<void> fetchEarning(EarningFilterModel? filter) async {
     emit(state.copyWith(earningListStatus: Status.LOADING));
     final response = await repository.fetchEarning(filter);
     response.fold(
-          (failure) =>
-          emit(state.copyWith(
-              earningListStatus: Status.ERROR, earningListFailure: failure),),
-          (boxes) =>
-          emit(state.copyWith(earningListStatus: Status.SUCCESS, earningList: boxes),
-          ),
+      (failure) => emit(
+        state.copyWith(
+            earningListStatus: Status.ERROR, earningListFailure: failure),
+      ),
+      (boxes) => emit(
+        state.copyWith(
+          earningListStatus: Status.SUCCESS,
+          earningList: boxes.results,
+          currentEarningPage: state.currentEarningPage + 1,
+        ),
+      ),
     );
   }
 }

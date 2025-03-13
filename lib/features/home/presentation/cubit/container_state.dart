@@ -5,6 +5,7 @@ class ContainerState {
   final Status boxListStatus, earningListStatus;
   final List<BoxResponseModel> boxList;
   final List<EarningResponseModel> earningList;
+   int currentEarningPage;
 
   ContainerState({
     this.boxListFailure = const UnknownFailure(),
@@ -13,6 +14,7 @@ class ContainerState {
     this.earningListStatus = Status.UNKNOWN,
     this.boxList = const [],
     this.earningList = const [],
+    this.currentEarningPage = 0,
   });
 
   ContainerState copyWith({
@@ -22,6 +24,7 @@ class ContainerState {
     Status? earningListStatus,
     List<BoxResponseModel>? boxList,
     List<EarningResponseModel>? earningList,
+    int? currentEarningPage,
   }) {
     return ContainerState(
       boxListFailure: boxListFailure ?? this.boxListFailure,
@@ -30,6 +33,7 @@ class ContainerState {
       earningListStatus: earningListStatus ?? this.earningListStatus,
       boxList: boxList ?? this.boxList,
       earningList: earningList ?? this.earningList,
+      currentEarningPage: currentEarningPage ?? this.currentEarningPage,
     );
   }
 }

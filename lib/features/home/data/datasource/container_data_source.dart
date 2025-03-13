@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
-import 'package:tozauz_agent/core/api/api.dart';
 import 'package:tozauz_agent/core/error/failure.dart';
+import 'package:tozauz_agent/features/home/data/models/agent_earning_response_model.dart';
 import 'package:tozauz_agent/features/home/data/models/box_response_model.dart';
 import 'package:tozauz_agent/features/home/data/models/earning_response_model.dart';
 
@@ -10,7 +10,7 @@ import '../models/earning_filter_model.dart';
 
 abstract class ContainerDataSource {
   Future<Either<Failure, List<BoxResponseModel>>> fetchBoxes();
-  Future<Either<Failure, List<EarningResponseModel>>> fetchEarning(EarningFilterModel? filter);
+  Future<Either<Failure, AgentEarningResponse>> fetchEarning(EarningFilterModel? filter);
 }
 
 class ContainerDataSourceImpl implements ContainerDataSource {
@@ -62,7 +62,7 @@ class ContainerDataSourceImpl implements ContainerDataSource {
   }
 
   @override
-  Future<Either<Failure, List<EarningResponseModel>>> fetchEarning(EarningFilterModel? filter) async {
+  Future<Either<Failure, AgentEarningResponse>> fetchEarning(EarningFilterModel? filter) async {
     try {
       Response response = await dioClient.get(
         queryParameters: {
@@ -84,12 +84,8 @@ class ContainerDataSourceImpl implements ContainerDataSource {
       );
 
       if (response.statusCode == 200) {
-        List<EarningResponseModel> boxes = [];
-        for (var box in response.data['results']) {
-          boxes.add(EarningResponseModel.fromJson(box));
-        }
 
-        return Right(boxes);
+        return Right(AgentEarningResponse.fromJson(response.data));
       } else {
         return Left(ServerFailure(response.statusCode));
       }
