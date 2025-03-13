@@ -1,14 +1,6 @@
-import 'package:get_it/get_it.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tozauz_agent/features/common/domain/uscase/auth/login_usecase.dart';
-import 'core/api/dio_client.dart';
-import 'core/utils/pref_manager.dart';
-import 'features/common/cubit/auth/auth_cubit.dart';
-import 'features/common/data/repository/auth.dart' show AuthRepository;
-import 'features/common/domain/repository/auth.dart' show IAuthRepository;
-import 'features/common/domain/uscase/auth/check_user_auth.dart'
-    show CheckUserToAuthUseCase;
-import 'features/common/domain/uscase/auth/logout.dart' show LogoutUseCase;
+
+
+import 'export.dart';
 
 final inject = GetIt.instance;
 
@@ -34,8 +26,11 @@ void initPrefManager(SharedPreferences pref) {
 // Register prefManager
 void _dataSources() {
   // Login
-  // inject.registerLazySingleton<LoginDataSources>(
-  //         () => LoginDataSourcesImpl(inject(), inject()));
+  inject.registerLazySingleton<ContainerDataSource>(
+    () => ContainerDataSourceImpl(
+      inject(),
+    ),
+  );
   // inject.registerLazySingleton<PrefManager>(() => PrefM);
 }
 
@@ -45,6 +40,13 @@ void _repositories() {
     () => AuthRepository(
       inject(),
       inject(),
+    ),
+  );
+
+  inject.registerLazySingleton<ContainerRepository>(
+    () => ContainerRepositoryImpl(
+      inject(),
+      // inject(),
     ),
   );
 }
@@ -66,4 +68,6 @@ void _cubit() {
       inject(),
     ),
   );
+
+  inject.registerFactory(()=> ContainerCubit(inject()));
 }

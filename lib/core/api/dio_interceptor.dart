@@ -25,10 +25,10 @@ class MySmartDioInterceptor extends Interceptor {
     options.headers['Accept'] = 'application/json';
     // options.headers['accept-language'] = _lang ?? 'uz';
 
-    if (_token.isNotEmpty) {
-      options.headers["Authorization"] = "Bearer $_token";
-    }
-    debugPrint('REQUEST::${options.data}');
+    // if (_token.isNotEmpty) {
+    //   options.headers["Authorization"] = "Bearer $_token";
+    // }
+    debugPrint('REQUEST:${options.data}');
     handler.next(options);
   }
  
@@ -80,10 +80,10 @@ class MySmartDioInterceptor extends Interceptor {
             _failedRequests[i]['err'].requestOptions as RequestOptions;
         final options = Options(
           method: requestOptions.method,
-          headers: {
-            'Authorization': 'Token $_token',
-            'Content-Type': 'application/json',
-          },
+          // headers: {
+            // 'Authorization': 'Token $_token',
+            // 'Content-Type': 'application/json',
+          // },
         );
         late Response cloneReq;
         try {

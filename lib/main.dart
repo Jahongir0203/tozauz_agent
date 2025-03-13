@@ -14,6 +14,9 @@ Future<void> main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => inject<AuthCubit>()),
+        BlocProvider(
+          create: (context) => inject<ContainerCubit>()..fetchBoxes(),
+        ),
         ChangeNotifierProvider(create: (_) => ThemeNotifier(Brightness.light)),
       ],
       child: MyApp(),
