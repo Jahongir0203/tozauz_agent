@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:tozauz_agent/core/error/failure.dart';
+import 'package:tozauz_agent/features/home/data/models/earning_filter_model.dart';
 import 'package:tozauz_agent/features/home/data/models/earning_response_model.dart';
 import 'package:tozauz_agent/features/home/domain/respository/container_repository.dart';
 
@@ -28,9 +29,9 @@ class ContainerCubit extends Cubit<ContainerState> {
 
   }
 
-  Future<void> fetchEarning() async {
+  Future<void> fetchEarning(EarningFilterModel? filter) async {
     emit(state.copyWith(earningListStatus: Status.LOADING));
-    final response = await repository.fetchEarning();
+    final response = await repository.fetchEarning(filter);
     response.fold(
           (failure) =>
           emit(state.copyWith(

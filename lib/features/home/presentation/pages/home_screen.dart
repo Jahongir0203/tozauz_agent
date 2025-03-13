@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
             );
           }
           return RefreshIndicator(
-            onRefresh: ()async{
+            onRefresh: () async {
               context.read<ContainerCubit>().fetchBoxes();
             },
             child: ListView.separated(
@@ -48,7 +48,14 @@ class HomeScreen extends StatelessWidget {
                 return ContainerItem(
                   model: state.boxList[index],
                   onTap: () {
-                    Navigator.pushNamed(context, AppRoutes.containerDetailScreen);
+                    Navigator.pushNamed(
+                      context,
+                      AppRoutes.containerDetailScreen,
+                      arguments: {
+                        "name": state.boxList[index].name,
+                        "id": state.boxList[index].id,
+                      },
+                    );
                   },
                 );
               },

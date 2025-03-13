@@ -1,12 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tozauz_agent/core/extension/date_time_formatter.dart';
 import 'package:tozauz_agent/core/extension/widget_extantion.dart';
 import 'package:tozauz_agent/export.dart';
 import 'package:tozauz_agent/features/common/widget/app_text_style.dart';
+import 'package:tozauz_agent/features/home/data/models/earning_response_model.dart';
 
 class ContainerDetailListItem extends StatelessWidget {
   final Function() onTap;
-  const ContainerDetailListItem({super.key, required this.onTap});
+  final EarningResponseModel model;
+  const ContainerDetailListItem({super.key, required this.onTap, required this.model});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,7 @@ class ContainerDetailListItem extends StatelessWidget {
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "title",
+            model.tarrif ?? '',
             style: AppTextStyles().body16w6,
           ),
           Spacer(),
@@ -27,13 +30,13 @@ class ContainerDetailListItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                "+UZS 450",
+                "+UZS ${model.amount}",
                 style: AppTextStyles().body14w6.copyWith(
                       color: AppColors.green,
                     ),
               ),
               Text(
-                "2025 M03 7 15:51",
+                model.createdAt?.toDateFormat() ?? '',
                 style: AppTextStyles().body12w6.copyWith(
                   color: AppColors.grey4,
                 ),

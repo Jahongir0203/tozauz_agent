@@ -3,12 +3,13 @@ import 'package:tozauz_agent/core/extension/date_time_formatter.dart';
 import 'package:tozauz_agent/core/extension/number_formatter.dart';
 import 'package:tozauz_agent/export.dart';
 import 'package:tozauz_agent/features/common/widget/app_text_style.dart';
+import 'package:tozauz_agent/features/home/data/models/earning_response_model.dart';
 import 'package:tozauz_agent/features/home/presentation/pages/widget/title_with_row.dart';
 
 class ContainerIncomeBottomSheet extends StatelessWidget {
-  final String? title;
+  final EarningResponseModel mode;
 
-  const ContainerIncomeBottomSheet({super.key, this.title});
+  const ContainerIncomeBottomSheet({super.key, required this.mode});
 
   @override
   Widget build(BuildContext context) {

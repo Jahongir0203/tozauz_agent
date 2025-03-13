@@ -15,8 +15,14 @@ class RouteGenerate {
       case AppRoutes.mainScreen:
         return simpleRoute(const MainScreen());
       case AppRoutes.containerDetailScreen:
-        return simpleRoute(const ContainerDetailScreen());
-        case AppRoutes.loginScreen:
+        var data = settings.arguments as Map<String, dynamic>;
+        return simpleRoute(
+          ContainerDetailScreen(
+            box: data["name"],
+            id: data['id'],
+          ),
+        );
+      case AppRoutes.loginScreen:
         return simpleRoute(const LoginScreen());
     }
     return null;

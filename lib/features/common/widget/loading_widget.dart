@@ -15,7 +15,7 @@ class LoadingWidget extends StatelessWidget {
              color: color ?? AppColors.white,
               strokeWidth: wi(2.5),
               backgroundColor: AppColors.black.withOpacity(.1),)
-          : CupertinoActivityIndicator(color: color ?? AppColors.white),
+          : CupertinoActivityIndicator(color: color ?? AppColors.primaryColor),
     );
   }
 }
