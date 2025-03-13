@@ -1,60 +1,76 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tozauz_agent/core/utils/helper_widget.dart';
+import 'package:tozauz_agent/core/extension/date_time_formatter.dart';
 import 'package:tozauz_agent/export.dart';
-import 'package:tozauz_agent/features/common/widget/app_text_style.dart';
 import 'package:tozauz_agent/features/payment/presentation/pages/payment/part/payment_history_modal_bottom.dart';
 
-class PaymentHistory extends StatelessWidget {
+import '../../cubit/payment_cubit.dart';
+
+class PaymentHistory extends StatefulWidget {
   const PaymentHistory({super.key});
 
   @override
+  State<PaymentHistory> createState() => _PaymentHistoryState();
+}
+
+class _PaymentHistoryState extends State<PaymentHistory> {
+  @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      itemBuilder: (context, index) {
-        return InkWell(
-          onTap: () {
-            PaymentHistoryBottomSheet().show(context);
+    return BlocBuilder<PaymentCubit, PaymentState>(
+      builder: (context, state) {
+        var cubit = context.read<PaymentCubit>();
+        return RefreshIndicator(
+          onRefresh: () async {
+            return cubit.getArchivePayment();
           },
-          splashColor: AppColors.primaryOpacity,
-          hoverColor: AppColors.primaryOpacity,
-          highlightColor: AppColors.primaryOpacity,
-          child: Row(
-            children: [
-              Text(
-                "2225 5555 5555 5599",
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              Spacer(),
-              Column(
-                children: [
-                  Text(
-                    "UZS 100",
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                  DecoratedBox(
-                    decoration: BoxDecoration(
-                        color: AppColors.green,
-                        borderRadius: BorderRadius.circular(5.r)),
-                    child: Text(
-                      "To'landi",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodySmall
-                          ?.copyWith(color: AppColors.white),
-                    ).paddingAll(5.sp),
-                  ),
-                ],
-              ),
-            ],
-          ).paddingAll(16.sp),
+          child: ListView.separated(
+            itemBuilder: (context, index) {
+              var model = state.archivePaymentList[index];
+              return InkWell(
+                onTap: () {
+                  PaymentHistoryBottomSheet().show(context);
+                },
+                splashColor: AppColors.primaryOpacity,
+                hoverColor: AppColors.primaryOpacity,
+                highlightColor: AppColors.primaryOpacity,
+                child: Row(
+                  children: [
+                    Text(
+                      model.card?.cardFormatter() ?? '',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    Spacer(),
+                    Column(
+                      children: [
+                        Text(
+                          "UZS ${model.amount}",
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                        DecoratedBox(
+                          decoration: BoxDecoration(
+                              color: AppColors.orange,
+                              borderRadius: BorderRadius.circular(5.r)),
+                          child: Text(
+                            "Kutilmoqda",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.copyWith(color: AppColors.white),
+                          ).paddingAll(5.sp),
+                        ),
+                      ],
+                    ),
+                  ],
+                ).paddingAll(16.sp),
+              );
+            },
+            separatorBuilder: (context, index) {
+              return customDivider;
+            },
+            itemCount: state.archivePaymentList.length,
+          ),
         );
       },
-      separatorBuilder: (context, index) {
-        return customDivider;
-      },
-      itemCount: 10,
     );
   }
 }

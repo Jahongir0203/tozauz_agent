@@ -29,6 +29,20 @@ extension DateTimeFormatExtension on DateTime {
 }
 
 
+extension NumberFormatters on String {
+  String cardFormatter() {
+    final NumberFormat formatter = NumberFormat('####,####');
+
+    final int? number = int.tryParse(this);
+
+    if (number == null) {
+      return this; // Agar noto‘g‘ri string bo‘lsa, o‘zini qaytarish
+    }
+
+    return formatter.format(number);
+  }
+}
+
 
 extension DateTimeFormatter on String {
   /// Parses the string into a DateTime object.

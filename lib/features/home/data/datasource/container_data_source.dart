@@ -4,6 +4,8 @@ import 'package:tozauz_agent/core/error/failure.dart';
 import 'package:tozauz_agent/features/home/data/models/agent_earning_response_model.dart';
 import 'package:tozauz_agent/features/home/data/models/box_response_model.dart';
 import 'package:tozauz_agent/features/home/data/models/earning_response_model.dart';
+import 'package:tozauz_agent/features/payment/data/model/archive_payment_response.dart';
+import 'package:tozauz_agent/features/payment/data/model/bank_response_model.dart';
 
 import '../../../../export.dart';
 import '../models/earning_filter_model.dart';
@@ -11,6 +13,9 @@ import '../models/earning_filter_model.dart';
 abstract class ContainerDataSource {
   Future<Either<Failure, List<BoxResponseModel>>> fetchBoxes();
   Future<Either<Failure, AgentEarningResponse>> fetchEarning(EarningFilterModel? filter);
+
+  Future<Either<Failure, BankResponseModel>> fetchMeBank();
+  Future<Either<Failure, List<ArchivePaymentResponse>>> fetchArchivePayment();
 }
 
 class ContainerDataSourceImpl implements ContainerDataSource {
@@ -37,6 +42,92 @@ class ContainerDataSourceImpl implements ContainerDataSource {
         }
 
         return Right(boxes);
+      } else {
+        return Left(ServerFailure(response.statusCode));
+      }
+    } on DioException catch (e) {
+      if (e.error is SocketException) {
+        return const Left(ConnectionFailure());
+      }
+      if (e.response?.statusCode == 500 || e.response?.statusCode == 502) {
+        return Left(ServerFailure(e.response?.statusCode));
+      }
+      if (e.response?.statusCode == 400) {
+        final errorMessage = e.response?.data['message'] ?? 'Unknown error';
+        return Left(GeneralFailure(errorMessage));
+      } else {
+        return Left(ServerFailure(e.response?.statusCode));
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        debugPrint(e.toString());
+      }
+      rethrow;
+    }
+  }
+
+
+
+  @override
+  Future<Either<Failure, List<ArchivePaymentResponse>>> fetchArchivePayment() async {
+    try {
+      Response response = await dioClient.get(
+        ListAPI.archivePayment,
+          options: Options(
+              headers: {
+                "Authorization":"Token 3ccaf710b1cf1d53c27a0c54f31b67a94350f4f5"
+              }
+          )
+      );
+
+      if (response.statusCode == 200) {
+        List<ArchivePaymentResponse> boxes = [];
+        for (var box in response.data['results']) {
+          boxes.add(ArchivePaymentResponse.fromJson(box));
+        }
+
+        return Right(boxes);
+      } else {
+        return Left(ServerFailure(response.statusCode));
+      }
+    } on DioException catch (e) {
+      if (e.error is SocketException) {
+        return const Left(ConnectionFailure());
+      }
+      if (e.response?.statusCode == 500 || e.response?.statusCode == 502) {
+        return Left(ServerFailure(e.response?.statusCode));
+      }
+      if (e.response?.statusCode == 400) {
+        final errorMessage = e.response?.data['message'] ?? 'Unknown error';
+        return Left(GeneralFailure(errorMessage));
+      } else {
+        return Left(ServerFailure(e.response?.statusCode));
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        debugPrint(e.toString());
+      }
+      rethrow;
+    }
+  }
+
+
+  @override
+  Future<Either<Failure, BankResponseModel>> fetchMeBank() async {
+    try {
+      Response response = await dioClient.get(
+        ListAPI.meBank,
+          options: Options(
+              headers: {
+                "Authorization":"Token 3ccaf710b1cf1d53c27a0c54f31b67a94350f4f5"
+              }
+          )
+      );
+
+      if (response.statusCode == 200) {
+
+
+        return Right(BankResponseModel.fromJson(response.data));
       } else {
         return Left(ServerFailure(response.statusCode));
       }

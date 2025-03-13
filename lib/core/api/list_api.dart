@@ -14,6 +14,8 @@ static const String userID = 'userID';
 static const String login = 'v1/account/api-token-auth/';
 static const String boxes = 'v1/ecopacket/agent/boxes/';
 static const String agentEarnings = 'v1/bank/agent-earning-list/';
+static const String meBank = 'v1/bank/me-bank/';
+static const String archivePayment = 'v1/bank/agent/payme/list/';
 
 
 

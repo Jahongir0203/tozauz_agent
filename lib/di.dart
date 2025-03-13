@@ -1,5 +1,4 @@
-
-
+import 'package:tozauz_agent/features/payment/presentation/cubit/payment_cubit.dart';
 import 'export.dart';
 
 final inject = GetIt.instance;
@@ -70,4 +69,5 @@ void _cubit() {
   );
 
   inject.registerFactory(()=> ContainerCubit(inject()));
+  inject.registerFactory(()=> PaymentCubit(inject()));
 }

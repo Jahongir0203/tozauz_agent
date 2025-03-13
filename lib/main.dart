@@ -2,6 +2,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart'
     show ScreenUtil, ScreenUtilInit;
 import 'package:provider/provider.dart';
+import 'package:tozauz_agent/features/payment/presentation/cubit/payment_cubit.dart';
 import 'core/values/theme_notifier.dart';
 import 'export.dart';
 
@@ -16,6 +17,9 @@ Future<void> main() async {
         BlocProvider(create: (context) => inject<AuthCubit>()),
         BlocProvider(
           create: (context) => inject<ContainerCubit>()..fetchBoxes(),
+        ),
+        BlocProvider(
+          create: (context) => inject<PaymentCubit>()..getMeBank(),
         ),
         ChangeNotifierProvider(create: (_) => ThemeNotifier(Brightness.light)),
       ],

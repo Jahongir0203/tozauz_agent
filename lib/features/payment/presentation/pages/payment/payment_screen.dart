@@ -6,7 +6,10 @@ import 'package:tozauz_agent/export.dart';
 import 'package:tozauz_agent/features/common/widget/app_text_style.dart';
 import 'package:tozauz_agent/features/common/widget/custom_app_bar.dart';
 import 'package:tozauz_agent/features/common/widget/text_field_widget.dart';
+import 'package:tozauz_agent/features/payment/presentation/cubit/payment_cubit.dart';
 import 'package:tozauz_agent/features/payment/presentation/pages/payment/payment_history.dart';
+
+import '../../../../../core/values/app_strings.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({super.key});
@@ -22,9 +25,11 @@ class _PaymentScreenState extends State<PaymentScreen>
   late TextEditingController cardNumberController;
   bool buttonEnabled = false;
 
+
   @override
   void initState() {
     super.initState();
+    context.read<PaymentCubit>().getArchivePayment();
     _tabController = TabController(length: 2, vsync: this);
     amountController = TextEditingController();
     cardNumberController = TextEditingController();
@@ -69,61 +74,86 @@ class _PaymentScreenState extends State<PaymentScreen>
       body: TabBarView(
         controller: _tabController,
         children: [
-          Column(
-            children: [
-              CustomButton(
-                bgColor: AppColors.transparent,
-                borderColor: AppColors.grey2,
-                textColor: context.theme.textTheme.titleLarge?.color,
-                text: "Balans: 2400",
-                onTap: () {},
-              ),
-              20.verticalSpace,
-              SizedBox(
-                width: context.w,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: AppColors.grey2),
-                    borderRadius: BorderRadius.circular(10.r),
+          BlocBuilder<PaymentCubit, PaymentState>(
+            builder: (context, state) {
+              if (state.bankSt == Status.LOADING) {
+                return Center(
+                  child: LoadingWidget(),
+                );
+              } else if (state.bankSt == Status.ERROR) {
+                return Column(
+                  children: [
+                    Text(
+                      state.bankFailure.getLocalizedMessage(context),
+                      style: AppTextStyles().body20w6,
+                    ),
+                    16.verticalSpace,
+                    CustomButton(
+                      text: "Qayta urunish",
+                      onTap: () {
+                        context.read<PaymentCubit>().getMeBank();
+                      },
+                    )
+                  ],
+                );
+              }
+              return Column(
+                children: [
+                  CustomButton(
+                    bgColor: AppColors.transparent,
+                    borderColor: AppColors.grey2,
+                    textColor: context.theme.textTheme.titleLarge?.color,
+                    text: "Balans: UZS, ${state.bankResponseModel?.capital}",
+                    onTap: () {},
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Pul so'rovi",
-                        style: AppTextStyles().body20w6.copyWith(
-                              fontWeight: FontWeight.w600,
-                            ),
+                  20.verticalSpace,
+                  SizedBox(
+                    width: context.w,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: AppColors.grey2),
+                        borderRadius: BorderRadius.circular(10.r),
                       ),
-                      20.verticalSpace,
-                      CustomTextField(
-                        textEditingController: amountController,
-                        labelText: "Pul miqdori",
-                        textInputType: TextInputType.number,
-                        hintText: "Pul miqdori",
-                      ),
-                      10.verticalSpace,
-                      CustomTextField(
-                        textEditingController: cardNumberController,
-                        labelText: "Karta raqami",
-                        formatter: [Formatters.cardNumberFormatter],
-                        textInputType: TextInputType.number,
-                        hintText: "Karta raqamingizni kiriting",
-                      ),
-                    ],
-                  ).paddingAll(24.sp),
-                ),
-              ),
-              Spacer(),
-              CustomButton(
-                text: "Pul so‘rovini so‘rash",
-                onTap: buttonEnabled ? () {} : () {},
-                bgColor:
-                    buttonEnabled ? AppColors.primaryColor : AppColors.grey2,
-              ),
-            ],
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Pul so'rovi",
+                            style: AppTextStyles().body20w6.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                ),
+                          ),
+                          20.verticalSpace,
+                          CustomTextField(
+                            textEditingController: amountController,
+                            labelText: "Pul miqdori",
+                            textInputType: TextInputType.number,
+                            hintText: "Pul miqdori",
+                          ),
+                          10.verticalSpace,
+                          CustomTextField(
+                            textEditingController: cardNumberController,
+                            labelText: "Karta raqami",
+                            formatter: [Formatters.cardNumberFormatter],
+                            textInputType: TextInputType.number,
+                            hintText: "Karta raqamingizni kiriting",
+                          ),
+                        ],
+                      ).paddingAll(24.sp),
+                    ),
+                  ),
+                  Spacer(),
+                  CustomButton(
+                    text: "Pul so‘rovini so‘rash",
+                    onTap: buttonEnabled ? () {} : () {},
+                    bgColor: buttonEnabled
+                        ? AppColors.primaryColor
+                        : AppColors.grey2,
+                  ),
+                ],
+              );
+            },
           ),
-
           PaymentHistory(),
         ],
       )
