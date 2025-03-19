@@ -91,8 +91,6 @@ class CustomDropDownWidget extends StatelessWidget {
                   color: Colors.red,
                 ),
                 closedErrorBorder: Border.all(color: Colors.red, width: 1),
-                closedBorder:
-                Border.all(color: borderColor ?? AppColors.scaffoldBackground),
                 closedFillColor: bgColor ?? Theme.of(context).scaffoldBackgroundColor,
                 listItemDecoration: ListItemDecoration(
                   selectedIconColor: themeNotifier.isDarkMode
@@ -120,7 +118,6 @@ class CustomDropDownWidget extends StatelessWidget {
                         .bodyMedium
                         ?.copyWith(
                         fontWeight: FontWeight.w400,
-                        color: AppColors.black,
                         fontSize: 14.sp),
               ),
               items: list,

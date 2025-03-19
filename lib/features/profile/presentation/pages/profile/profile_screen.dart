@@ -24,6 +24,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         action: [
           DayNightSwitch(
             initiallyDark: themeNotifier.isDarkMode,
+
             onChange: (p0) {
               themeNotifier.changeTheme(
                   isSystem: false, isDarkMode: !themeNotifier.isDarkMode);
