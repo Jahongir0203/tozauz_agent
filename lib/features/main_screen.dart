@@ -1,8 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:tozauz_agent/features/home/presentation/pages/home_screen.dart';
 import 'package:tozauz_agent/features/payment/presentation/pages/payment/payment_screen.dart';
 import 'package:tozauz_agent/features/profile/presentation/pages/profile/profile_screen.dart';
 import 'package:tozauz_agent/features/reports/presentation/pages/reports_screen.dart';
+
+import '../core/utils/locale_keys.g.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -37,22 +40,22 @@ class _MainScreenState extends State<MainScreen> {
         selectedItemColor: Colors.blue, // Change color as needed
         unselectedItemColor: Colors.grey,
         type: BottomNavigationBarType.fixed,
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: const Icon(Icons.home),
+            label: LocaleKeys.containers.tr(),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.bar_chart),
-            label: 'Reports',
+            label: LocaleKeys.reports.tr(),
           ),
-          BottomNavigationBarItem(
+           BottomNavigationBarItem(
             icon: Icon(Icons.account_balance_wallet),
-            label: 'Wallet',
+            label: LocaleKeys.wallet.tr(),
           ),
-          BottomNavigationBarItem(
+           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'Profile',
+            label: LocaleKeys.profile.tr(),
           ),
         ],
       ),

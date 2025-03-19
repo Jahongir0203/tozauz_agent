@@ -6,16 +6,20 @@ import '../../../core/utils/size_config.dart';
 
 class LoadingWidget extends StatelessWidget {
   const LoadingWidget({super.key, this.color});
+
   final Color? color;
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Platform.isAndroid
           ? CircularProgressIndicator(
-             color: color ?? AppColors.white,
+              color: color ?? Theme.of(context).colorScheme.primary,
               strokeWidth: wi(2.5),
-              backgroundColor: AppColors.black.withOpacity(.1),)
-          : CupertinoActivityIndicator(color: color ?? AppColors.primaryColor),
+              backgroundColor: AppColors.black.withOpacity(.1),
+            )
+          : CupertinoActivityIndicator(
+              color: color ?? Theme.of(context).colorScheme.onSecondary),
     );
   }
 }

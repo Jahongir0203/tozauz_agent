@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -63,10 +63,9 @@ class _SplashScreenState extends State<SplashScreen> {
                 textAlign: TextAlign.center,
                 "v.1.0.0",
                 // "V.${AppUpdateService.appVersion}",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall
-                    ?.copyWith(fontSize: he(13), color: AppColors.black)),
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      fontSize: he(13),
+                    )),
             SizedBox(height: customButtonPadding)
           ],
         ).paddingSymmetric(horizontal: 16.w));

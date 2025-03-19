@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tozauz_agent/core/extension/for_context.dart';
 import 'package:tozauz_agent/core/utils/formatters.dart';
@@ -7,6 +8,7 @@ import 'package:tozauz_agent/features/common/widget/custom_app_bar.dart';
 import 'package:tozauz_agent/features/common/widget/text_field_widget.dart';
 import 'package:tozauz_agent/features/payment/presentation/cubit/payment_cubit.dart';
 import 'package:tozauz_agent/features/payment/presentation/pages/payment/payment_history.dart';
+import '../../../../../core/utils/locale_keys.g.dart';
 import '../../../../../core/values/app_strings.dart';
 
 class PaymentScreen extends StatefulWidget {
@@ -60,12 +62,12 @@ class _PaymentScreenState extends State<PaymentScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: "Pul so'rovlari",
+        title: LocaleKeys.paymentRequest.tr(),
         bottom: TabBar(
           controller: _tabController,
-          tabs: const [
-            Tab(text: "Yangi pul so'rovi"),
-            Tab(text: "Pul so‘rovlar tarixi"),
+          tabs:  [
+            Tab(text: LocaleKeys.newPaymentRequest.tr()),
+            Tab(text: LocaleKeys.paymentRequestHistory.tr()),
           ],
         ),
       ),
@@ -88,7 +90,7 @@ class _PaymentScreenState extends State<PaymentScreen>
                     ),
                     16.verticalSpace,
                     CustomButton(
-                      text: "Qayta urunish",
+                      text: LocaleKeys.reDownload.tr(),
                       onTap: () {
                         context.read<PaymentCubit>().getMeBank();
                       },
@@ -101,8 +103,8 @@ class _PaymentScreenState extends State<PaymentScreen>
                   CustomButton(
                     bgColor: AppColors.transparent,
                     borderColor: AppColors.grey2,
-                    textColor: context.theme.textTheme.titleLarge?.color,
-                    text: "Balans: UZS, ${state.bankResponseModel?.capital}",
+                    textColor: Theme.of(context).textTheme.titleLarge?.color,
+                    text: "${LocaleKeys.balance.tr()} UZS, ${state.bankResponseModel?.capital}",
                     onTap: () {},
                   ),
                   20.verticalSpace,
@@ -110,32 +112,35 @@ class _PaymentScreenState extends State<PaymentScreen>
                     width: context.w,
                     child: DecoratedBox(
                       decoration: BoxDecoration(
-                        border: Border.all(color: AppColors.grey2),
+                        border: Border.all(color: AppColors.grey2,
+                          width: 0.5
+
+                        ),
                         borderRadius: BorderRadius.circular(10.r),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Pul so'rovi",
-                            style: AppTextStyles().body20w6.copyWith(
+                            LocaleKeys.paymentRequest.tr(),
+                            style:Theme.of(context).textTheme.titleLarge!.copyWith(
                                   fontWeight: FontWeight.w600,
                                 ),
                           ),
                           20.verticalSpace,
                           CustomTextField(
                             textEditingController: amountController,
-                            labelText: "Pul miqdori",
+                            labelText: LocaleKeys.amount.tr(),
                             textInputType: TextInputType.number,
-                            hintText: "Pul miqdori",
+                            hintText: LocaleKeys.enterAmount.tr(),
                           ),
                           10.verticalSpace,
                           CustomTextField(
                             textEditingController: cardNumberController,
-                            labelText: "Karta raqami",
+                            labelText: LocaleKeys.cardNumber.tr(),
                             formatter: [Formatters.cardNumberFormatter],
                             textInputType: TextInputType.number,
-                            hintText: "Karta raqamingizni kiriting",
+                            hintText: LocaleKeys.cardNumber.tr(),
                           ),
                         ],
                       ).paddingAll(24.sp),
@@ -143,11 +148,11 @@ class _PaymentScreenState extends State<PaymentScreen>
                   ),
                   Spacer(),
                   CustomButton(
-                    text: "Pul so‘rovini so‘rash",
+                    text: LocaleKeys.paymentRequest.tr(),
                     onTap: buttonEnabled ? () {} : () {},
                     bgColor: buttonEnabled
                         ? AppColors.primaryColor
-                        : AppColors.grey2,
+                        : Theme.of(context).highlightColor,
                   ),
                 ],
               );

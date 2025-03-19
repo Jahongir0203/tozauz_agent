@@ -78,7 +78,8 @@ dependencies:
   delightful_toast: ^1.1.0
 #  path_provider: ^2.1.5
 #  flutter_cache_manager: ^3.4.1
-
+  day_night_themed_switcher: ^1.2.5
+  easy_localization: ^3.0.7+1
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -93,6 +94,7 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/fonts/
+    - assets/translations/
 #
 #  fonts:
 #    - family: Lato

@@ -23,7 +23,7 @@ class ContainerDetailListItem extends StatelessWidget {
         children: [
           Text(
             model.tarrif ?? '',
-            style: AppTextStyles().body16w6,
+            style: Theme.of(context).textTheme.titleMedium,
           ),
           Spacer(),
           Column(
@@ -38,7 +38,7 @@ class ContainerDetailListItem extends StatelessWidget {
               Text(
                 model.createdAt?.toDateFormat() ?? '',
                 style: AppTextStyles().body12w6.copyWith(
-                  color: AppColors.grey4,
+                  color: AppColors.grey5,
                 ),
               ),
             ],

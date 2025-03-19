@@ -16,8 +16,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool isDivider;
   final List<Widget>? action;
   final Widget? bottom;
-
-
+ final Widget? leading;
   final String? rightIcon;
   final Function()? leftOnTap;
   final Function()? rightOnTap;
@@ -31,7 +30,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.rightOnTap,
     this.isDivider = true,
     this.action,
-    this.bottom,
+    this.bottom, this.leading,
   }) : preferredSize = const Size.fromHeight(kToolbarHeight + 20);
 
   @override
@@ -41,19 +40,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       scrolledUnderElevation: 0.0,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       centerTitle: true,
       toolbarHeight: 100.h,
       bottom: PreferredSize(
-        preferredSize:  Size.fromHeight(isDivider ? 1 : 0),
+        preferredSize: Size.fromHeight(isDivider ? 1 : 0),
         child: bottom ?? customDivider,
       ),
-
+      leading: leading,
       title: Text(
         title ?? "",
-        style: Theme.of(context)
-            .textTheme
-            .bodyLarge
-            ?.copyWith(color: AppColors.primaryColor),
+        style: Theme.of(context).textTheme.bodyLarge,
       ),
       // leading: leftIcon != null
       //     ? ScaleButton(

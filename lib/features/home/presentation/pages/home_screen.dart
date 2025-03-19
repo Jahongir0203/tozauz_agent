@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tozauz_agent/core/utils/locale_keys.g.dart';
 import 'package:tozauz_agent/export.dart';
 import 'package:tozauz_agent/features/common/widget/app_text_style.dart';
 import 'package:tozauz_agent/features/common/widget/custom_app_bar.dart';
@@ -14,7 +16,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: "Konterneylar",
+        title: LocaleKeys.containers.tr(),
       ),
       body: BlocBuilder<ContainerCubit, ContainerState>(
         builder: (context, state) {
@@ -30,7 +32,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 20.verticalSpace,
                 CustomButton(
-                  text: "Qayta yuklash",
+                  text: LocaleKeys.reDownload.tr(),
                   onTap: () {
                     context.read<ContainerCubit>().fetchBoxes();
                   },

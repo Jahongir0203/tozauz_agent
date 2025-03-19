@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tozauz_agent/core/extension/widget_extantion.dart';
+import 'package:tozauz_agent/core/utils/locale_keys.g.dart';
 import 'package:tozauz_agent/core/values/app_colors.dart';
 import 'package:tozauz_agent/features/common/widget/app_text_style.dart';
 import 'package:tozauz_agent/features/home/data/models/box_response_model.dart';
@@ -31,7 +33,7 @@ class ContainerItem extends StatelessWidget {
                 offset: const Offset(0, 0),
               )
             ],
-            color: AppColors.white,
+            color: Theme.of(context).cardColor,
           ),
           child: Column(
             spacing: 4.h,
@@ -39,32 +41,32 @@ class ContainerItem extends StatelessWidget {
             children: [
               Text(
                 model.name ?? '',
-                style: AppTextStyles().body20w6,
+                style: Theme.of(context).textTheme.titleLarge,
               ),
               10.verticalSpace,
               TitleWithRow(
-                title: 'Doramad: ',
+                title: LocaleKeys.earnings.tr(),
                 value:
                     "UZS ${double.parse(model.sellerShare ?? '').toStringAsFixed(0)}/${double.parse(model.sellerPercentage ?? '').toStringAsFixed(0)}%",
               ),
               TitleWithRow(
-                title: 'Oxirgi bo‘shatish: ',
+                title: LocaleKeys.lastEmpty.tr(),
                 value: "",
               ),
               TitleWithRow(
-                title: 'Narxi: ',
+                title: LocaleKeys.price.tr(),
                 value: "UZS ${model.category?.summa}",
               ),
               TitleWithRow(
-                title: 'Holati: ',
-                value: model.isActive! ? "Activ" : "Aktiv emas",
+                title: LocaleKeys.status.tr(),
+                value: model.isActive! ? LocaleKeys.active.tr(): LocaleKeys.notActive.tr(),
               ),
               TitleWithRow(
-                title: 'Sim module: ',
+                title: LocaleKeys.simModule.tr(),
                 value: model.simModule.toString() ?? '',
               ),
               TitleWithRow(
-                title: 'Manzil: ',
+                title: LocaleKeys.address.tr(),
                 value: model.address ?? '',
               ),
             ],

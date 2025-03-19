@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tozauz_agent/core/extension/date_time_formatter.dart';
 import 'package:tozauz_agent/export.dart';
 import 'package:tozauz_agent/features/payment/presentation/pages/payment/part/payment_history_modal_bottom.dart';
 
+import '../../../../../core/utils/locale_keys.g.dart';
 import '../../cubit/payment_cubit.dart';
 
 class PaymentHistory extends StatefulWidget {
@@ -32,7 +34,7 @@ class _PaymentHistoryState extends State<PaymentHistory> {
                 },
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    color: AppColors.white,
+                    color:Theme.of(context).cardColor,
                     borderRadius: BorderRadius.circular(10.r),
                     boxShadow: [
                       BoxShadow(
@@ -61,7 +63,7 @@ class _PaymentHistoryState extends State<PaymentHistory> {
                                 color: AppColors.orange,
                                 borderRadius: BorderRadius.circular(5.r)),
                             child: Text(
-                              "Kutilmoqda",
+                              LocaleKeys.expecting.tr(),
                               style: Theme.of(context)
                                   .textTheme
                                   .bodySmall

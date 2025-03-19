@@ -35,9 +35,11 @@ class AppStrings {
   static const String strInner = 'Inner';
   static const String strTMA = 'TMA';
   static const String strLang = 'Language';
-  // static const String strRussian = 'Russian';
+  static const String localePath="assets/translations";
+  static const String uz='uz';
+  static const String en='en';
+  static const String ru='ru';
 
-
-
+// static const String strRussian = 'Russian';
 
 }

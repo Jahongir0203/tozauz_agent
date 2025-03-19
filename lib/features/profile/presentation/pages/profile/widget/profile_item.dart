@@ -31,7 +31,7 @@ class ProfileItem extends StatelessWidget {
             Icon(
               icon,
               size: 24.sp,
-              color: AppColors.black.withAlpha(0x80),
+              color: AppColors.grey5 ,
             ),
             10.horizontalSpace,
             Text(

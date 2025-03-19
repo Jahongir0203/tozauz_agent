@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_date_range_picker/flutter_date_range_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tozauz_agent/core/extension/for_context.dart';
+import 'package:tozauz_agent/core/utils/locale_keys.g.dart';
 import 'package:tozauz_agent/core/values/app_strings.dart';
 import 'package:tozauz_agent/export.dart';
 import 'package:tozauz_agent/features/common/widget/app_text_style.dart';
@@ -47,12 +49,22 @@ class _ContainerDetailScreenState extends State<ContainerDetailScreen> {
       child: Scaffold(
         appBar: CustomAppBar(
           title: widget.box,
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: Theme.of(context).colorScheme.onPrimary,
+              )),
         ),
         body: Column(
           children: [
             20.verticalSpace,
             CustomButton(
-              text: selectedDateRange.toString(),
+              text: selectedDateRange.toString().isEmpty
+                  ? DateTime.now().toString()
+                  : selectedDateRange.toString(),
               onTap: () {
                 showDateRangePickerDialog(
                     context: context,
@@ -93,7 +105,7 @@ class _ContainerDetailScreenState extends State<ContainerDetailScreen> {
                       ),
                       20.verticalSpace,
                       CustomButton(
-                        text: "Qayta yuklash",
+                        text: LocaleKeys.reDownload.tr(),
                         onTap: () {
                           cubit.fetchEarning(filter.copyWith(page: 1));
                         },

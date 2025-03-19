@@ -1,8 +1,7 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:tozauz_agent/core/extension/for_context.dart';
+import 'package:tozauz_agent/core/utils/locale_keys.g.dart';
 import 'package:tozauz_agent/export.dart';
-import 'package:tozauz_agent/features/common/widget/app_text_style.dart';
-import 'package:tozauz_agent/features/common/widget/custom_app_bar.dart';
 import 'package:tozauz_agent/features/common/widget/custom_drop_down.dart';
 import 'package:tozauz_agent/features/home/presentation/pages/widget/title_with_row.dart';
 
@@ -35,12 +34,12 @@ class _ReportsScreenState extends State<ReportsScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: "Arizalar",
+        title: LocaleKeys.reports.tr(),
         bottom: TabBar(
           controller: _tabController,
-          tabs: const [
-            Tab(text: "Yangi Ariza"),
-            Tab(text: "Arizalar"),
+          tabs: [
+            Tab(text: LocaleKeys.newReports.tr()),
+            Tab(text: LocaleKeys.reportsHistory.tr()),
           ],
         ),
       ),
@@ -58,13 +57,13 @@ class _ReportsScreenState extends State<ReportsScreen>
                     "Tashkent",
                     "Namangan",
                   ],
-                  hintText: "Konater turi",
+                  hintText: LocaleKeys.typeOfContainers.tr(),
                 ),
               ),
               16.verticalSpace,
               Text(
-                "Konterlar soni: ",
-                style: AppTextStyles().body16w6,
+                LocaleKeys.numOfContainers.tr(),
+                style: Theme.of(context).textTheme.titleMedium,
               ),
               10.verticalSpace,
               Row(
@@ -74,19 +73,17 @@ class _ReportsScreenState extends State<ReportsScreen>
                     child: IconButton.filled(
                       style: IconButton.styleFrom(
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.r)
-                          )
-                      ),
+                              borderRadius: BorderRadius.circular(10.r))),
                       onPressed: () {
-                        if(containerCount > 1){
+                        if (containerCount > 1) {
                           setState(() {
                             containerCount--;
                           });
                         }
-
                       },
                       icon: Icon(
-                        Icons.add,
+                        Icons.remove,
+                        color: AppColors.white,
                       ).paddingAll(9.sp),
                     ),
                   ),
@@ -101,17 +98,15 @@ class _ReportsScreenState extends State<ReportsScreen>
                       child: Text(
                         containerCount.toString(),
                         textAlign: TextAlign.center,
-                        style: AppTextStyles().body20w6,
+                        style: Theme.of(context).textTheme.titleLarge,
                       ).paddingAll(16.sp),
                     ),
                   ),
                   Expanded(
                     child: IconButton.filled(
                       style: IconButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.r)
-                        )
-                      ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.r))),
                       onPressed: () {
                         setState(() {
                           containerCount++;
@@ -119,6 +114,7 @@ class _ReportsScreenState extends State<ReportsScreen>
                       },
                       icon: Icon(
                         Icons.add,
+                        color: AppColors.white,
                       ).paddingAll(9.sp),
                     ),
                   ),
@@ -136,24 +132,24 @@ class _ReportsScreenState extends State<ReportsScreen>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "1 ta Kontainer",
-                      style: AppTextStyles().body16w6,
+                      LocaleKeys.oneContainer.tr(),
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                     10.verticalSpace,
                     TitleWithRow(
-                      title: "Kontainer soni",
-                      value: "$containerCount ta",
+                      title: LocaleKeys.numOfContainers.tr(),
+                      value: "1 ta",
                     ),
                     10.verticalSpace,
                     Text(
-                      "Umumiy to'lov",
-                      style: AppTextStyles().body20w6,
+                      LocaleKeys.totalPayment.tr(),
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
                     16.verticalSpace,
                     CustomButton(
                       bgColor:
                           paymentType == 0 ? AppColors.green : AppColors.grey2,
-                      text: "Balans bilan to'lash UZS 2000",
+                      text: "${LocaleKeys.payWithBalance.tr()} UZS 2000",
                       onTap: () {
                         setState(() {
                           paymentType = 0;
@@ -164,25 +160,24 @@ class _ReportsScreenState extends State<ReportsScreen>
                     CustomButton(
                       bgColor:
                           paymentType == 1 ? AppColors.green : AppColors.grey2,
-                      text: "Karta bilan",
+                      text: LocaleKeys.withCard.tr(),
                       onTap: () {
                         setState(() {
                           paymentType = 1;
                         });
                       },
                     ),
-
                   ],
                 ).paddingAll(24.sp),
               ),
               20.verticalSpace,
               CustomButton(
-                text: "Ariza yuborish",
+                text: LocaleKeys.sendPaymentRequest.tr(),
                 onTap: () {},
               ),
             ],
           ).paddingSymmetric(horizontal: 16.w, vertical: 20.h),
-          Center(child: Text("Arizalar ro'yxati")),
+          Center(child: Text(LocaleKeys.reportsHistory.tr())),
         ],
       ),
     );

@@ -1,15 +1,15 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart'
     show ScreenUtil, ScreenUtilInit;
 import 'package:provider/provider.dart';
-import 'package:tozauz_agent/features/payment/presentation/cubit/payment_cubit.dart';
-import 'core/values/theme_notifier.dart';
 import 'export.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await initDi();
+  await EasyLocalization.ensureInitialized();
 
   runApp(
     MultiBlocProvider(
@@ -21,9 +21,14 @@ Future<void> main() async {
         BlocProvider(
           create: (context) => inject<PaymentCubit>()..getMeBank(),
         ),
-        ChangeNotifierProvider(create: (_) => ThemeNotifier(Brightness.light)),
       ],
-      child: MyApp(),
+      child: EasyLocalization(
+        path: AppStrings.localePath,
+        supportedLocales: EasyLocale.all,
+        fallbackLocale: EasyLocale.all.last,
+        saveLocale: true,
+        child: MyApp(),
+      ),
     ),
   );
 }
@@ -35,52 +40,53 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     ScreenUtil.init(context);
-
-    themeNotifier = Provider.of<ThemeNotifier>(context);
-
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-
-    return ScreenUtilInit(
-        minTextAdapt: true,
-        designSize: Size(
-          MediaQuery.of(context).size.width,
-          MediaQuery.of(context).size.height,
-        ),
-        builder: (context, child) {
-          return GestureDetector(
-            onTap: () => FocusManager.instance.primaryFocus?.unfocus,
-            child: MediaQuery(
-              data: MediaQuery.of(context).copyWith(
-                textScaler: const TextScaler.linear(1),
-              ),
-              child: MaterialApp(
-                debugShowCheckedModeBanner: false,
-                title: 'TozaUz Agent',
-                theme: appThemeData,
-                // locale: Locale(state.language),
-                // localizationsDelegates: const [
-                //   GlobalMaterialLocalizations.delegate,
-                //   GlobalWidgetsLocalizations.delegate,
-                //   GlobalCupertinoLocalizations.delegate,
-                //   S.delegate
-                // ],
-                // supportedLocales: const [
-                //   Locale('en'),
-                //   Locale('ru'),
-                //   Locale('uz'),
-                // ],
-                onGenerateRoute: RouteGenerate().generate,
-                navigatorKey: navigatorKey,
-                builder: (context, child) {
-                  return ScrollConfiguration(
-                      behavior: MyBehavior(), child: child!);
-                },
-                initialRoute: AppRoutes.splashScreen,
-                // home: CustomLeftDrawerWithoutIcon(),
-              ),
+    final Brightness brightness =
+        WidgetsBinding.instance.platformDispatcher.platformBrightness;
+    themeNotifier = ThemeNotifier(brightness);
+    return ChangeNotifierProvider(
+      create: (context) => themeNotifier,
+      child: ValueListenableBuilder<ThemeData>(
+        valueListenable: themeNotifier,
+        builder: (context, value, child) {
+          return ScreenUtilInit(
+            minTextAdapt: true,
+            designSize: Size(
+              MediaQuery.of(context).size.width,
+              MediaQuery.of(context).size.height,
             ),
+            builder: (context, child) {
+              return GestureDetector(
+                onTap: () => FocusManager.instance.primaryFocus?.unfocus,
+                child: MediaQuery(
+                  data: MediaQuery.of(context).copyWith(
+                    textScaler: const TextScaler.linear(1),
+                  ),
+                  child: MaterialApp(
+                    debugShowCheckedModeBanner: false,
+                    title: 'TozaUz Agent',
+                    theme: themeNotifier.isDarkMode
+                        ? AppTheme.darkTheme()
+                        : AppTheme.lightTheme(),
+                    localizationsDelegates: context.localizationDelegates,
+                    supportedLocales: context.supportedLocales,
+                    locale: context.locale,
+                    onGenerateRoute: RouteGenerate().generate,
+                    navigatorKey: navigatorKey,
+                    builder: (context, child) {
+                      return ScrollConfiguration(
+                          behavior: MyBehavior(), child: child!);
+                    },
+                    initialRoute: AppRoutes.splashScreen,
+                    // home: CustomLeftDrawerWithoutIcon(),
+                  ),
+                ),
+              );
+            },
           );
-        });
+        },
+      ),
+    );
   }
 }
 

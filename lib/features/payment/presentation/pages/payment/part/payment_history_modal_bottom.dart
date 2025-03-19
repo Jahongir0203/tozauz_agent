@@ -1,9 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tozauz_agent/core/extension/date_time_formatter.dart';
 import 'package:tozauz_agent/core/extension/number_formatter.dart';
 import 'package:tozauz_agent/export.dart';
 import 'package:tozauz_agent/features/common/widget/app_text_style.dart';
 import 'package:tozauz_agent/features/home/presentation/pages/widget/title_with_row.dart';
+
+import '../../../../../../core/utils/locale_keys.g.dart';
 
 class PaymentHistoryBottomSheet extends StatelessWidget {
 
@@ -18,24 +21,24 @@ class PaymentHistoryBottomSheet extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Pul so'rovi tarixi",
-          style: AppTextStyles().body16w6,
+          LocaleKeys.paymentRequestHistory.tr(),
+          style: Theme.of(context).textTheme.titleMedium,
         ),
         10.verticalSpace,
         TitleWithRow(
-          title: 'Amount: ',
+          title: LocaleKeys.amount.tr(),
           value: "UZS 100",
         ),
         TitleWithRow(
-          title: 'Status: ',
+          title: LocaleKeys.status.tr(),
           value: "Tasdiqlangan",
         ),
         TitleWithRow(
-          title: 'Card number: ',
+          title: LocaleKeys.cardNumber.tr(),
           value: "1123 2344 4566 4566",
         ),
         TitleWithRow(
-          title: 'Date: ',
+          title: LocaleKeys.date.tr(),
           value: DateTime.now().toDateFormat(),
         ),
         20.verticalSpace,
@@ -52,6 +55,7 @@ class PaymentHistoryBottomSheet extends StatelessWidget {
   show(BuildContext context) {
     return showModalBottomSheet(
       context: context,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       builder: (context) {
         return this;
       },

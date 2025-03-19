@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tozauz_agent/core/values/app_colors.dart';
+import 'package:tozauz_agent/core/values/app_strings.dart';
 
 String elon =
     "https://www.gipr.uz/files/01-2024/ad20104/bannierlarda-rieklama-riek-1305947804_large.webp";
@@ -14,10 +15,12 @@ final double customButtonPadding =
     MediaQuery.of(navigatorKey.currentState!.context).padding.bottom + 20;
 final double customBarPadding =
     MediaQuery.of(navigatorKey.currentState!.context).padding.top;
-Widget customDivider =
-    const Divider(color: AppColors.secondary, thickness: 1.5, height: 0);
+Widget customDivider = const Divider(thickness: 1.5, height: 0);
 
-
-
-
-
+class EasyLocale {
+  static final all = [
+    const Locale(AppStrings.uz),
+    const Locale(AppStrings.ru),
+    const Locale(AppStrings.en),
+  ];
+}

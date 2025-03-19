@@ -30,4 +30,5 @@ class AppColors {
   static const secondary2 = Color(0xFFF8F8FA);
   static const cff8989 = Color(0xFFFF8989);
   static const c964A4A = Color(0xFF964A4A);
+  static const scaffoldDark=Color(0xff0E1621);
 }

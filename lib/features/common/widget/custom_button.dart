@@ -56,7 +56,8 @@ class CustomButton extends StatelessWidget {
               horizontal: wi(8)),
           decoration: BoxDecoration(
               borderRadius: radius ?? BorderRadius.circular(10),
-              border: Border.all(color: borderColor ?? AppColors.transparent),
+              border: Border.all(
+                  color: borderColor ?? AppColors.transparent, width: 0.5),
               color: bgColor ?? AppColors.primaryColor),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -80,11 +81,10 @@ class CustomButton extends StatelessWidget {
                             maxLines: 1,
                             style: Theme.of(context)
                                 .textTheme
-                                .titleLarge
-                                ?.copyWith(
-                                    color: textColor ?? AppColors.white,
-                                    fontSize: fontSize ?? 16,
-                                    fontWeight: fontW),
+                                .titleLarge!.copyWith(
+                              fontSize: 16,
+                              color:textColor ?? AppColors.white
+                            ),
                           ),
                         ),
                         rightW ?? const SizedBox.shrink(),
@@ -182,9 +182,7 @@ class CustomOutlineButton extends StatelessWidget {
                   : Center(
                       child: Text(
                         text,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: textColor ?? AppColors.primaryColor,
-                            ),
+                        style: Theme.of(context).textTheme.bodyMedium
                       ),
                     ),
         ),

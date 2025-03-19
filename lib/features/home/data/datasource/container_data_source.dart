@@ -1,14 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:tozauz_agent/core/error/failure.dart';
-import 'package:tozauz_agent/features/home/data/models/agent_earning_response_model.dart';
-import 'package:tozauz_agent/features/home/data/models/box_response_model.dart';
-import 'package:tozauz_agent/features/home/data/models/earning_response_model.dart';
-import 'package:tozauz_agent/features/payment/data/model/archive_payment_response.dart';
-import 'package:tozauz_agent/features/payment/data/model/bank_response_model.dart';
-
 import '../../../../export.dart';
-import '../models/earning_filter_model.dart';
 
 abstract class ContainerDataSource {
   Future<Either<Failure, List<BoxResponseModel>>> fetchBoxes();
@@ -16,6 +9,8 @@ abstract class ContainerDataSource {
 
   Future<Either<Failure, BankResponseModel>> fetchMeBank();
   Future<Either<Failure, List<ArchivePaymentResponse>>> fetchArchivePayment();
+
+
 }
 
 class ContainerDataSourceImpl implements ContainerDataSource {

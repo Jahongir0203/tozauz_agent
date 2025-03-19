@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:tozauz_agent/features/common/widget/app_text_style.dart';
 
 class TitleWithRow extends StatelessWidget {
@@ -12,12 +13,12 @@ class TitleWithRow extends StatelessWidget {
       children: [
         Text(
           title,
-          style: AppTextStyles().body16w6,
+          style: Theme.of(context).textTheme.titleMedium,
         ),
         Spacer(),
         Text(
           value,
-          style: AppTextStyles().body16w6,
+          style: Theme.of(context).textTheme.titleMedium,
         ),
       ],
     );

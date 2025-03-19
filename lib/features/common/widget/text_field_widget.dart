@@ -83,9 +83,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
           Text(
             widget.labelText!,
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
-              color: AppColors.black,
-              fontSize: 12.sp,
-            ),
+                  color: AppColors.grey5,
+                  fontSize: 12.sp,
+                ),
           ),
           5.verticalSpace
         ],
@@ -100,9 +100,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
           onFieldSubmitted: widget.onFieldSubmitted,
           initialValue: widget.initialValue,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: AppColors.black,
-            fontWeight: FontWeight.w400,
-          ),
+                fontWeight: FontWeight.w400,
+              ),
           obscureText: isObscured,
           textInputAction: widget.textInputAction,
           keyboardType: widget.textInputType,
@@ -114,78 +113,60 @@ class _CustomTextFieldState extends State<CustomTextField> {
           decoration: InputDecoration(
             hintText: widget.hintText,
             hintStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
-              color: AppColors.grey3,
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w400,
-            ),
+                  color: AppColors.grey3,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w400,
+                ),
             contentPadding: EdgeInsets.symmetric(horizontal: 8.h),
             suffixIconConstraints:
-            const BoxConstraints(minHeight: 25, minWidth: 25),
+                const BoxConstraints(minHeight: 25, minWidth: 25),
             prefixIcon: widget.prefixIcon == null
                 ? null
                 : SvgPicture.asset(
-              widget.prefixIcon!,
-              height: he(20),
-              colorFilter: ColorFilter.mode(
-                  widget.preIconColor ?? AppColors.grey1,
-                  BlendMode.srcIn),
-            ).paddingAll(11),
+                    widget.prefixIcon!,
+                    height: he(20),
+                    colorFilter: ColorFilter.mode(
+                        widget.preIconColor ?? AppColors.grey1,
+                        BlendMode.srcIn),
+                  ).paddingAll(11),
 
             // **Ko‘zcha ikonasi orqali ko'rinishni o'zgartirish**
             suffixIcon: widget.obscure == true
                 ? IconButton(
-              onPressed: () {
-                setState(() {
-                  isObscured = !isObscured;
-                });
-              },
-              color: AppColors.black,
-              icon: Icon(
-                isObscured ? Icons.visibility_off : Icons.visibility,
-              ),
-            )
+                    onPressed: () {
+                      setState(() {
+                        isObscured = !isObscured;
+                      });
+                    },
+
+                    icon: Icon(
+                      isObscured ? Icons.visibility_off : Icons.visibility,
+                      color: AppColors.white,                     ),
+                  )
                 : (widget.suffixIcon == null
-                ? null
-                : ScaleButton(
-              bound: 0.040,
-              onTap: widget.suffixIconOnTap,
-              child: SvgPicture.asset(
-                widget.suffixIcon!,
-                height: he(20),
-                colorFilter: ColorFilter.mode(
-                    widget.preIconColor ?? AppColors.grey1,
-                    BlendMode.srcIn),
-              ),
-            ).paddingAll(11)),
-            filled: true,
-            fillColor: widget.fillColor ?? Colors.white,
-            border: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              borderSide: BorderSide(color: AppColors.grey2),
-            ),
-            enabledBorder: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              borderSide: BorderSide(color: AppColors.grey2),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-              borderSide: BorderSide(
-                color: widget.borderColor ?? AppColors.primaryColor,
-                width: 1.2,
-              ),
-            ),
-            focusedErrorBorder: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              borderSide: BorderSide(color: Colors.red),
-            ),
-            disabledBorder: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              borderSide: BorderSide(color: AppColors.grey2),
-            ),
+                    ? null
+                    : ScaleButton(
+                        bound: 0.040,
+                        onTap: widget.suffixIconOnTap,
+                        child: SvgPicture.asset(
+                          widget.suffixIcon!,
+                          height: he(20),
+                          colorFilter: ColorFilter.mode(
+                              widget.preIconColor ?? AppColors.grey1,
+                              BlendMode.srcIn),
+                        ),
+                      ).paddingAll(11)),
+            filled: Theme.of(context).inputDecorationTheme.filled,
+            fillColor: widget.fillColor ??
+                Theme.of(context).inputDecorationTheme.fillColor,
+            border: Theme.of(context).inputDecorationTheme.border,
+            enabledBorder: Theme.of(context).inputDecorationTheme.enabledBorder,
+            focusedBorder: Theme.of(context).inputDecorationTheme.focusedBorder,
+            focusedErrorBorder:Theme.of(context).inputDecorationTheme.focusedErrorBorder ,
+            disabledBorder:Theme.of(context).inputDecorationTheme.disabledBorder,
           ),
         ),
       ],
     );
   }
 }
-

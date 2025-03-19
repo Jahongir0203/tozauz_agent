@@ -21,7 +21,7 @@ class ContainerIncomeBottomSheet extends StatelessWidget {
       children: [
         Text(
           "Daromat tafsilotlari",
-          style: AppTextStyles().body16w6,
+          style: Theme.of(context).textTheme.titleMedium,
         ),
         10.verticalSpace,
         TitleWithRow(
@@ -61,8 +61,11 @@ class ContainerIncomeBottomSheet extends StatelessWidget {
 
   show(BuildContext context) {
     return showModalBottomSheet(
+      backgroundColor: Theme.of(context).cardColor,
       context: context,
+
       builder: (context) {
+
         return this;
       },
     );

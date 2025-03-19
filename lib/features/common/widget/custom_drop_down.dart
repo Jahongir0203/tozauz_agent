@@ -59,7 +59,9 @@ class CustomDropDownWidget extends StatelessWidget {
           if (label != null) ...[
             Text(
               label!,
-              style: AppTextStyles().body13w6,
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                fontSize: 13.sp
+              ),
             ),
             // 5.verticalSpace,
           ],
@@ -74,10 +76,10 @@ class CustomDropDownWidget extends StatelessWidget {
               hintText: hintText,
               controller: selectController,
               decoration: CustomDropdownDecoration(
-                closedErrorBorderRadius: BorderRadius.circular(radius ?? 10.r),
-                closedBorderRadius: BorderRadius.circular(radius ?? 10.r),
-                expandedBorderRadius: BorderRadius.circular(radius ?? 10.r),
-                expandedFillColor: AppColors.white,
+                // closedErrorBorderRadius: BorderRadius.circular(radius ?? 10.r),
+                // closedBorderRadius: BorderRadius.circular(radius ?? 10.r),
+                // expandedBorderRadius: BorderRadius.circular(radius ?? 10.r),
+                expandedFillColor: Theme.of(context).scaffoldBackgroundColor,
                 // closedSuffixIcon: SvgPicture.asset(
                 //   AppIcons.dropDown,
                 //   colorFilter: ColorFilter.mode(
@@ -90,8 +92,8 @@ class CustomDropDownWidget extends StatelessWidget {
                 ),
                 closedErrorBorder: Border.all(color: Colors.red, width: 1),
                 closedBorder:
-                Border.all(color: borderColor ?? AppColors.grey2),
-                closedFillColor: bgColor ?? AppColors.white,
+                Border.all(color: borderColor ?? AppColors.scaffoldBackground),
+                closedFillColor: bgColor ?? Theme.of(context).scaffoldBackgroundColor,
                 listItemDecoration: ListItemDecoration(
                   selectedIconColor: themeNotifier.isDarkMode
                       ? AppColors.primaryColor
