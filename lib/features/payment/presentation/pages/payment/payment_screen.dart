@@ -86,7 +86,7 @@ class _PaymentScreenState extends State<PaymentScreen>
                   children: [
                     Text(
                       state.bankFailure.getLocalizedMessage(context),
-                      style: AppTextStyles().body20w6,
+                      style:Theme.of(context).textTheme.titleLarge ,
                     ),
                     16.verticalSpace,
                     CustomButton(

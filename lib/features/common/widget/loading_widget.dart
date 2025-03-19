@@ -14,7 +14,7 @@ class LoadingWidget extends StatelessWidget {
     return Center(
       child: Platform.isAndroid
           ? CircularProgressIndicator(
-              color: color ?? Theme.of(context).colorScheme.primary,
+              color: color ?? Theme.of(context).colorScheme.onPrimary,
               strokeWidth: wi(2.5),
               backgroundColor: AppColors.black.withOpacity(.1),
             )

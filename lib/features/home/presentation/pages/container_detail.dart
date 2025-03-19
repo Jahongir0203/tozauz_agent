@@ -101,7 +101,7 @@ class _ContainerDetailScreenState extends State<ContainerDetailScreen> {
                       20.verticalSpace,
                       Text(
                         state.boxListFailure.getLocalizedMessage(context),
-                        style: AppTextStyles().body20w6,
+                        style: Theme.of(context).textTheme.titleLarge,
                       ),
                       20.verticalSpace,
                       CustomButton(
