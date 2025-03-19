@@ -41,9 +41,7 @@ class MyApp extends StatelessWidget {
     SizeConfig().init(context);
     ScreenUtil.init(context);
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    final Brightness brightness =
-        WidgetsBinding.instance.platformDispatcher.platformBrightness;
-    themeNotifier = ThemeNotifier(brightness);
+    themeNotifier = ThemeNotifier(Brightness.light);
     return ChangeNotifierProvider(
       create: (context) => themeNotifier,
       child: ValueListenableBuilder<ThemeData>(

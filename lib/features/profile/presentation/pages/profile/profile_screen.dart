@@ -18,6 +18,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print(themeNotifier.isDarkMode);
+    print(themeNotifier.isSystemMode);
+
     return Scaffold(
       appBar: CustomAppBar(
         title: LocaleKeys.profile.tr(),
