@@ -10,7 +10,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initDi();
   await EasyLocalization.ensureInitialized();
-
   runApp(
     MultiBlocProvider(
       providers: [
@@ -41,7 +40,9 @@ class MyApp extends StatelessWidget {
     SizeConfig().init(context);
     ScreenUtil.init(context);
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    themeNotifier = ThemeNotifier(Brightness.light);
+    themeNotifier =
+        ThemeNotifier(WidgetsBinding.instance.window.platformBrightness);
+
     return ChangeNotifierProvider(
       create: (context) => themeNotifier,
       child: ValueListenableBuilder<ThemeData>(
@@ -63,9 +64,7 @@ class MyApp extends StatelessWidget {
                   child: MaterialApp(
                     debugShowCheckedModeBanner: false,
                     title: 'TozaUz Agent',
-                    theme: themeNotifier.isDarkMode
-                        ? AppTheme.darkTheme()
-                        : AppTheme.lightTheme(),
+                    theme: value,
                     localizationsDelegates: context.localizationDelegates,
                     supportedLocales: context.supportedLocales,
                     locale: context.locale,
