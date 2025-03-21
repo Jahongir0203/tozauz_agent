@@ -4,6 +4,6 @@ part of 'reports_cubit.dart';
 class ReportsState with _$ReportsState {
   const factory ReportsState({
     final Status? status,
-    @Default(null) Failure? failure,
+    @Default(UnknownFailure()) Failure failure,
   }) = _ReportsState;
 }
