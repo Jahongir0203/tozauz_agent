@@ -1,5 +1,5 @@
-
 import 'package:easy_localization/easy_localization.dart';
+import 'package:tozauz_agent/features/profile/presentation/pages/profile/widget/update_password_modal_sheet.dart';
 
 import '../../../../../core/utils/locale_keys.g.dart';
 import '../../../../../export.dart';
@@ -80,7 +80,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 icon: Icons.security_outlined,
                 title: LocaleKeys.updatePassword.tr(),
                 value: "",
-                onTap: () {},
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                    useSafeArea: true,
+                    useRootNavigator: false,
+                    isDismissible: false,
+                    isScrollControlled: true,
+                    builder: (context) => UpdatePasswordModalSheet(),
+                  );
+                },
               ),
               ProfileActionModel(
                 icon: Icons.logout,
@@ -164,8 +174,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 }
-
-
 
 class ProfileActionModel {
   final String title;

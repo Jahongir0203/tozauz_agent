@@ -61,6 +61,12 @@
   "user": "Пользователь: ",
   "count": "Количество: ",
   "description": "Тариф:",
-  "phoneNumberR": "Номер телефона:"
+  "phoneNumberR": "Номер телефона:",
+  "currentPass": "Текущий пароль",
+  "newPass": "Новый пароль",
+  "confirmNewPass": "Подтвердите новый пароль",
+  "updatePass": "Обновить пароль",
+  "cancel": "Отмена"
+
 
 }

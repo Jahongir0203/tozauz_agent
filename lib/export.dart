@@ -84,3 +84,4 @@ export  'package:tozauz_agent/features/common/widget/custom_app_bar.dart';
 export  'package:tozauz_agent/features/payment/presentation/cubit/payment_cubit.dart';
 export  'package:tozauz_agent/features/profile/presentation/pages/profile/widget/language_modal_sheet.dart';
 export  'package:tozauz_agent/features/profile/presentation/pages/profile/widget/profile_item.dart';
+export '../../../../../../core/utils/locale_keys.g.dart';

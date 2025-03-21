@@ -61,6 +61,12 @@
   "user": "User:",
   "count": "Amount: ",
   "description": "Description:",
-  "phoneNumberR": "Phone number: "
+  "phoneNumberR": "Phone number: ",
+  "currentPass": "Current password",
+  "newPass": "New password",
+  "confirmNewPass": "Confirm new password",
+  "updatePass": "Update password",
+  "cancel": "Cancel"
+
 
 }

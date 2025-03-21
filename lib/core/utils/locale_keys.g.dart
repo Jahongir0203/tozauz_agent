@@ -66,5 +66,10 @@ abstract class  LocaleKeys {
   static const count = 'count';
   static const description = 'description';
   static const phoneNumberR = 'phoneNumberR';
+  static const currentPass = 'currentPass';
+  static const newPass = 'newPass';
+  static const confirmNewPass = 'confirmNewPass';
+  static const updatePass = 'updatePass';
+  static const cancel = 'cancel';
 
 }

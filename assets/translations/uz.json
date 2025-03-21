@@ -61,5 +61,10 @@
   "user": "Foydalanuvchi: ",
   "count": "Miqdor: ",
   "description": "Tarif: ",
-  "phoneNumberR": "Telefon raqam: "
+  "phoneNumberR": "Telefon raqam: ",
+  "currentPass": "Joriy parol",
+  "newPass": "Yangi parol",
+  "confirmNewPass": "Yangi parolni tasdiqlash",
+  "updatePass": "Parolni yangilash",
+  "cancel": "Bekor qilish"
 }
