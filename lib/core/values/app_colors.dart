@@ -31,4 +31,5 @@ class AppColors {
   static const cff8989 = Color(0xFFFF8989);
   static const c964A4A = Color(0xFF964A4A);
   static const scaffoldDark=Color(0xff0E1621);
+  static const cRed=Colors.red;
 }

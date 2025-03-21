@@ -41,5 +41,24 @@ abstract class  LocaleKeys {
   static const sendPaymentRequest = 'sendPaymentRequest';
   static const expecting = 'expecting';
   static const date = 'date';
+  static const close = 'close';
+  static const confirmed = 'confirmed';
+  static const cardholderFullName = 'cardholderFullName';
+  static const createPaymentSuccess = 'createPaymentSuccess';
+  static const serverError = 'serverError';
+  static const checkInternetConnection = 'checkInternetConnection';
+  static const unKnownFailure = 'unKnownFailure';
+  static const unAuthorizationFailure = 'unAuthorizationFailure';
+  static const cacheFailure = 'cacheFailure';
+  static const emailPasswordWrong = 'emailPasswordWrong';
+  static const userNotFound = 'userNotFound';
+  static const wrongCode = 'wrongCode';
+  static const enterPhone = 'enterPhone';
+  static const enterAvailablePhone = 'enterAvailablePhone';
+  static const enterPassword = 'enterPassword';
+  static const passwordLeastFour = 'passwordLeastFour';
+  static const error = 'error';
+  static const logIn = 'logIn';
+  static const password = 'password';
 
 }

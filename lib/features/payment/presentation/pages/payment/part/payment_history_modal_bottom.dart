@@ -1,17 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tozauz_agent/core/extension/date_time_formatter.dart';
-import 'package:tozauz_agent/core/extension/number_formatter.dart';
 import 'package:tozauz_agent/export.dart';
-import 'package:tozauz_agent/features/common/widget/app_text_style.dart';
 import 'package:tozauz_agent/features/home/presentation/pages/widget/title_with_row.dart';
 
 import '../../../../../../core/utils/locale_keys.g.dart';
 
 class PaymentHistoryBottomSheet extends StatelessWidget {
-
-  const PaymentHistoryBottomSheet({super.key,});
-
+  const PaymentHistoryBottomSheet({
+    super.key, required this.model,
+  });
+  final ArchivePaymentResponse model;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -27,15 +26,15 @@ class PaymentHistoryBottomSheet extends StatelessWidget {
         10.verticalSpace,
         TitleWithRow(
           title: LocaleKeys.amount.tr(),
-          value: "UZS 100",
+          value: "UZS ${model.amount}",
         ),
         TitleWithRow(
           title: LocaleKeys.status.tr(),
-          value: "Tasdiqlangan",
+          value: LocaleKeys.confirmed.tr(),
         ),
         TitleWithRow(
           title: LocaleKeys.cardNumber.tr(),
-          value: "1123 2344 4566 4566",
+          value: "${model.card}",
         ),
         TitleWithRow(
           title: LocaleKeys.date.tr(),
@@ -43,7 +42,7 @@ class PaymentHistoryBottomSheet extends StatelessWidget {
         ),
         20.verticalSpace,
         CustomButton(
-          text: "Yopish",
+          text: LocaleKeys.close.tr(),
           onTap: () {
             Navigator.pop(context);
           },

@@ -26,36 +26,36 @@ class _PaymentHistoryState extends State<PaymentHistory> {
           },
           child: ListView.separated(
             itemBuilder: (context, index) {
-              var model = state.archivePaymentList[index];
+              var model = state.archivePaymentList?[index];
               return GestureDetector(
-
                 onTap: () {
-                  PaymentHistoryBottomSheet().show(context);
+                  PaymentHistoryBottomSheet(
+                    model: model!,
+                  ).show(context);
                 },
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    color:Theme.of(context).cardColor,
-                    borderRadius: BorderRadius.circular(10.r),
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColors.black.withOpacity(0.2),
-                        blurRadius: 10.r,
-                        // spreadRadius: ,
-                        offset: const Offset(0, 0),
-                      ),
-                    ]
-                  ),
+                      color: Theme.of(context).cardColor,
+                      borderRadius: BorderRadius.circular(10.r),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.black.withOpacity(0.2),
+                          blurRadius: 10.r,
+                          // spreadRadius: ,
+                          offset: const Offset(0, 0),
+                        ),
+                      ]),
                   child: Row(
                     children: [
                       Text(
-                        model.card?.cardFormatter() ?? '',
+                        model?.card?.cardFormatter() ?? '',
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Spacer(),
                       Column(
                         children: [
                           Text(
-                            "UZS ${model.amount}",
+                            "UZS ${model?.amount}",
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
                           DecoratedBox(
@@ -80,7 +80,7 @@ class _PaymentHistoryState extends State<PaymentHistory> {
             separatorBuilder: (context, index) {
               return customDivider;
             },
-            itemCount: state.archivePaymentList.length,
+            itemCount: state.archivePaymentList?.length??0,
           ),
         );
       },

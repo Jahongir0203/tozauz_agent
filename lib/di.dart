@@ -1,3 +1,6 @@
+import 'package:tozauz_agent/features/payment/data/datasource/payment_datasource.dart';
+import 'package:tozauz_agent/features/payment/data/repository/payment_repository_impl.dart';
+import 'package:tozauz_agent/features/payment/domain/repository/payment_repository.dart';
 import 'package:tozauz_agent/features/payment/presentation/cubit/payment_cubit.dart';
 import 'export.dart';
 
@@ -30,6 +33,10 @@ void _dataSources() {
       inject(),
     ),
   );
+
+  inject.registerLazySingleton<PaymentDatSource>(
+    () => PaymentDataSourceImpl(dioClient: inject()),
+  );
   // inject.registerLazySingleton<PrefManager>(() => PrefM);
 }
 
@@ -47,6 +54,9 @@ void _repositories() {
       inject(),
       // inject(),
     ),
+  );
+  inject.registerLazySingleton<PaymentRepository>(
+    () => PaymentRepositoryImpl(paymentDatSource: inject()),
   );
 }
 
@@ -68,6 +78,6 @@ void _cubit() {
     ),
   );
 
-  inject.registerFactory(()=> ContainerCubit(inject()));
-  inject.registerFactory(()=> PaymentCubit(inject()));
+  inject.registerFactory(() => ContainerCubit(inject()));
+  inject.registerFactory(() => PaymentCubit(inject(), inject()));
 }

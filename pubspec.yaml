@@ -19,11 +19,11 @@ dependencies:
   equatable: ^2.0.5
   get_it: ^8.0.3
   # use json decode
-  #  freezed: ^2.4.3
-  #  json_serializable: ^6.7.0
-  #  json_annotation: ^4.9.0
+  freezed: ^2.4.3
+  json_serializable: ^6.7.0
+  json_annotation: ^4.9.0
   #  dartz: ^0.10.1
-  #  freezed_annotation: ^2.4.1
+  freezed_annotation: ^2.4.1
   # for api
   dio: ^5.5.0+1
   # Flutter plugin for local db for small data

@@ -1,8 +1,10 @@
 import 'package:delightful_toast/delight_toast.dart';
 import 'package:delightful_toast/toast/components/toast_card.dart';
 import 'package:delightful_toast/toast/utils/enums.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tozauz_agent/core/utils/formatters.dart';
+import 'package:tozauz_agent/core/utils/locale_keys.g.dart';
 import 'package:tozauz_agent/export.dart';
 import 'package:tozauz_agent/features/common/widget/custom_constrained_scroll.dart';
 import 'package:tozauz_agent/features/common/widget/text_field_widget.dart';
@@ -28,12 +30,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   String? _validatePhone(String? value) {
     if (value == null || value.isEmpty) {
-      return "Telefon raqamini kiriting";
+      return LocaleKeys.enterPhone.tr();
     }
     String digitsOnly = value.replaceAll(RegExp(r'\D'), ''); // Faqat raqamlarni olish
 
     if (!digitsOnly.startsWith('998') || digitsOnly.length != 12) {
-      return "Yaroqli telefon raqamini kiriting";
+      return LocaleKeys.enterAvailablePhone.tr();
     }
 
     return null; // Hammasi to‘g‘ri bo‘lsa, xatolik qaytarmaydi
@@ -41,9 +43,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   String? _validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return "Parolni kiriting";
+      return LocaleKeys.enterPassword.tr();
     } else if (value.length < 4) {
-      return "Parol kamida 4 ta belgidan iborat bo‘lishi kerak";
+      return LocaleKeys.passwordLeastFour.tr();
     }
     return null;
   }
@@ -65,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     builder: (_) => ToastCard(
                       color: Colors.red,
                       title: Text(
-                        "Xatolik",
+                        LocaleKeys.error.tr(),
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 14.sp,
@@ -92,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Formatters.phoneFormatter,
                       ],
                       hintText: "(99) 999 99 99",
-                      labelText: "Enter phone number",
+                      labelText: LocaleKeys.enterPhone.tr(),
                       textInputAction: TextInputAction.next,
                       textInputType: TextInputType.phone,
                       textEditingController: phoneController,
@@ -100,8 +102,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     16.verticalSpace,
                     CustomTextField(
-                      hintText: "Password",
-                      labelText: "Enter password",
+                      hintText: LocaleKeys.password.tr(),
+                      labelText: LocaleKeys.enterPassword.tr(),
                       textInputAction: TextInputAction.done,
                       textInputType: TextInputType.text,
                       obscure: true,
@@ -110,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     Spacer(),
                     CustomButton(
-                      text: "Login",
+                      text: LocaleKeys.logIn.tr(),
                       isLoading: state is AuthLoadingState,
                       onTap: () async {
                         if (_formKey.currentState!.validate()) {
