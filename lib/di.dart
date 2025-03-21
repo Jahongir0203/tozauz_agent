@@ -2,6 +2,10 @@ import 'package:tozauz_agent/features/payment/data/datasource/payment_datasource
 import 'package:tozauz_agent/features/payment/data/repository/payment_repository_impl.dart';
 import 'package:tozauz_agent/features/payment/domain/repository/payment_repository.dart';
 import 'package:tozauz_agent/features/payment/presentation/cubit/payment_cubit.dart';
+import 'package:tozauz_agent/features/reports/data/datasource/reports_datasource.dart';
+import 'package:tozauz_agent/features/reports/data/repository/reports_repository_impl.dart';
+import 'package:tozauz_agent/features/reports/domain/repository/reports_repository.dart';
+import 'package:tozauz_agent/features/reports/presentation/cubit/reports_cubit/reports_cubit.dart';
 import 'export.dart';
 
 final inject = GetIt.instance;
@@ -35,8 +39,10 @@ void _dataSources() {
   );
 
   inject.registerLazySingleton<PaymentDatSource>(
-    () => PaymentDataSourceImpl(dioClient: inject()),
-  );
+      () => PaymentDataSourceImpl(dioClient: inject()));
+
+  inject.registerLazySingleton<ReportsDataSource>(
+      () => ReportsDataSourceImpl(inject()));
   // inject.registerLazySingleton<PrefManager>(() => PrefM);
 }
 
@@ -58,6 +64,9 @@ void _repositories() {
   inject.registerLazySingleton<PaymentRepository>(
     () => PaymentRepositoryImpl(paymentDatSource: inject()),
   );
+
+  inject.registerLazySingleton<ReportsRepository>(
+      () => ReportsRepositoryImpl(inject()));
 }
 
 void _useCase() {
@@ -80,4 +89,5 @@ void _cubit() {
 
   inject.registerFactory(() => ContainerCubit(inject()));
   inject.registerFactory(() => PaymentCubit(inject(), inject()));
+  inject.registerFactory(() => ReportsCubit(inject()));
 }

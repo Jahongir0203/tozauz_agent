@@ -19,29 +19,20 @@ class _ReportsScreenState extends State<ReportsScreen>
   int paymentType = 0;
   int containerCount = 1;
   late TextEditingController commentController;
-  bool buttonEnabled = false;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
-    commentController=TextEditingController();
-    commentController.addListener(validateForm);
+    commentController = TextEditingController();
   }
 
-  validateForm(){
-    final commentValid=commentController.text.isNotEmpty;
-    setState(() {
-      buttonEnabled=commentValid;
-
-    });
-  }
   @override
   void dispose() {
     _tabController.dispose();
+    commentController.dispose();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -165,8 +156,9 @@ class _ReportsScreenState extends State<ReportsScreen>
                       ),
                       16.verticalSpace,
                       CustomButton(
-                        bgColor:
-                            paymentType == 0 ? AppColors.green : AppColors.grey2,
+                        bgColor: paymentType == 0
+                            ? AppColors.green
+                            : AppColors.grey2,
                         text: "${LocaleKeys.payWithBalance.tr()} UZS 2000",
                         onTap: () {
                           setState(() {
@@ -176,8 +168,9 @@ class _ReportsScreenState extends State<ReportsScreen>
                       ),
                       10.verticalSpace,
                       CustomButton(
-                        bgColor:
-                            paymentType == 1 ? AppColors.green : AppColors.grey2,
+                        bgColor: paymentType == 1
+                            ? AppColors.green
+                            : AppColors.grey2,
                         text: LocaleKeys.withCard.tr(),
                         onTap: () {
                           setState(() {
@@ -191,7 +184,8 @@ class _ReportsScreenState extends State<ReportsScreen>
                 20.verticalSpace,
                 CustomButton(
                   text: LocaleKeys.sendPaymentRequest.tr(),
-                  bgColor: containerCount > 0 && buttonEnabled
+
+                  bgColor: containerCount > 0
                       ? AppColors.primaryColor
                       : Theme.of(context).highlightColor,
                   onTap: () {},
