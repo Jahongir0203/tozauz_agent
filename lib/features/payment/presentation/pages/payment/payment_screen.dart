@@ -103,7 +103,7 @@ class _PaymentScreenState extends State<PaymentScreen>
                 return Column(
                   children: [
                     Text(
-                      state.bankFailure?.getLocalizedMessage(context)??'',
+                      state.bankFailure.getLocalizedMessage(context),
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     16.verticalSpace,

@@ -55,5 +55,11 @@
   "passwordLeastFour": "Parol kamida 4 ta belgidan iborat bo‘lishi kerak",
   "error": "Xatolik",
   "logIn": "Kirish",
-  "password": "Parol"
+  "password": "Parol",
+  "comment": "Izoh",
+  "incomeDescription": "Daromat tafsilotlari",
+  "user": "Foydalanuvchi: ",
+  "count": "Miqdor: ",
+  "description": "Tarif: ",
+  "phoneNumberR": "Telefon raqam: "
 }

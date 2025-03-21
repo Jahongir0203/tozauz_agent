@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tozauz_agent/core/extension/date_time_formatter.dart';
 import 'package:tozauz_agent/core/extension/number_formatter.dart';
+import 'package:tozauz_agent/core/utils/locale_keys.g.dart';
 import 'package:tozauz_agent/export.dart';
 import 'package:tozauz_agent/features/common/widget/app_text_style.dart';
 import 'package:tozauz_agent/features/home/data/models/earning_response_model.dart';
@@ -20,28 +22,28 @@ class ContainerIncomeBottomSheet extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Daromat tafsilotlari",
+          LocaleKeys.incomeDescription.tr(),
           style: Theme.of(context).textTheme.titleMedium,
         ),
         10.verticalSpace,
         TitleWithRow(
-          title: 'Foydalanuvchi: ',
+          title: LocaleKeys.user.tr(),
           value: "Ulug'bek",
         ),
         TitleWithRow(
-          title: 'Miqdor: ',
+          title: LocaleKeys.amount.tr(),
           value: "UZS 750",
         ),
         TitleWithRow(
-          title: 'Sana: ',
+          title: LocaleKeys.date.tr(),
           value: DateTime.now().toDateFormat(),
         ),
         TitleWithRow(
-          title: 'Tarif: ',
+          title: LocaleKeys.description.tr(),
           value: "Baklashka 10 l",
         ),
         TitleWithRow(
-          title: 'Telefon raqam: ',
+          title: LocaleKeys.phoneNumberR.tr(),
           value: "+998901234567".formatUzPhoneNumber(),
         ),
         TitleWithRow(
@@ -50,7 +52,7 @@ class ContainerIncomeBottomSheet extends StatelessWidget {
         ),
         20.verticalSpace,
         CustomButton(
-          text: "Yopish",
+          text: LocaleKeys.close.tr(),
           onTap: () {
             Navigator.pop(context);
           },

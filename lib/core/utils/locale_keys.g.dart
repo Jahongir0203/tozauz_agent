@@ -60,5 +60,11 @@ abstract class  LocaleKeys {
   static const error = 'error';
   static const logIn = 'logIn';
   static const password = 'password';
+  static const comment = 'comment';
+  static const incomeDescription = 'incomeDescription';
+  static const user = 'user';
+  static const count = 'count';
+  static const description = 'description';
+  static const phoneNumberR = 'phoneNumberR';
 
 }

@@ -41,6 +41,7 @@ class _ContainerDetailScreenState extends State<ContainerDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print(selectedDateRange);
     return BlocProvider(
       create: (context) => inject<ContainerCubit>()
         ..fetchEarning(
@@ -62,7 +63,7 @@ class _ContainerDetailScreenState extends State<ContainerDetailScreen> {
           children: [
             20.verticalSpace,
             CustomButton(
-              text: selectedDateRange.toString().isEmpty
+              text: selectedDateRange==null
                   ? DateTime.now().toString()
                   : selectedDateRange.toString(),
               onTap: () {
@@ -78,7 +79,7 @@ class _ContainerDetailScreenState extends State<ContainerDetailScreen> {
                           initialDateRange: selectedDateRange,
                           // disabledDates: [DateTime(2023, 11, 20),],
                           initialDisplayedDate: selectedDateRange?.start ??
-                              DateTime(2023, 11, 20),
+                              DateTime.now(),
                           onDateRangeChanged: (d) {
                             setState(() {
                               selectedDateRange = d;

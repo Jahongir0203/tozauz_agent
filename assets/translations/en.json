@@ -55,5 +55,12 @@
   "passwordLeastFour": "Password must be at least 4 characters",
   "error": "Error",
   "logIn": "Login",
-  "password": "Password"
+  "password": "Password",
+  "comment": "Comment",
+  "incomeDescription": "Income Details",
+  "user": "User:",
+  "count": "Amount: ",
+  "description": "Description:",
+  "phoneNumberR": "Phone number: "
+
 }

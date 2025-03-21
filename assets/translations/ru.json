@@ -55,5 +55,12 @@
   "passwordLeastFour": "Пароль должен быть не менее 4 символов",
   "error": "Ошибка",
   "logIn": "Войти",
-  "password": "Пароль"
+  "password": "Пароль",
+  "comment": "Комментарий",
+  "incomeDescription": "Подробности о доходах",
+  "user": "Пользователь: ",
+  "count": "Количество: ",
+  "description": "Тариф:",
+  "phoneNumberR": "Номер телефона:"
+
 }
