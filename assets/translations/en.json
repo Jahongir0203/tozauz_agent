@@ -66,7 +66,13 @@
   "newPass": "New password",
   "confirmNewPass": "Confirm new password",
   "updatePass": "Update password",
-  "cancel": "Cancel"
-
-
+  "cancel": "Cancel",
+  "updatePasswordSuccess": "Password updated successfully",
+  "pending": "Pending",
+  "approved": "Approved",
+  "rejected": "Rejected",
+  "inWay": "In Way",
+  "delivered": "Delivered",
+  "bankAccount": "Pay with balance",
+  "card": "With card"
 }

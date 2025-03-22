@@ -88,3 +88,4 @@ export '../../../../../../core/utils/locale_keys.g.dart';
 export 'package:tozauz_agent/features/common/data/models/success_model.dart';
 export 'package:flutter/foundation.dart';
 export '../../../../core/error/failure.dart';
+export "package:tozauz_agent/features/common/widget/custom_delight.dart";

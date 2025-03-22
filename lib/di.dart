@@ -2,6 +2,10 @@ import 'package:tozauz_agent/features/payment/data/datasource/payment_datasource
 import 'package:tozauz_agent/features/payment/data/repository/payment_repository_impl.dart';
 import 'package:tozauz_agent/features/payment/domain/repository/payment_repository.dart';
 import 'package:tozauz_agent/features/payment/presentation/cubit/payment_cubit.dart';
+import 'package:tozauz_agent/features/profile/data/datasource/profile_datasource.dart';
+import 'package:tozauz_agent/features/profile/data/repository/profile_repository_impl.dart';
+import 'package:tozauz_agent/features/profile/domain/repository/profile_repository.dart';
+import 'package:tozauz_agent/features/profile/presentation/cubits/profile_cubit/profile_cubit.dart';
 import 'package:tozauz_agent/features/reports/data/datasource/reports_datasource.dart';
 import 'package:tozauz_agent/features/reports/data/repository/reports_repository_impl.dart';
 import 'package:tozauz_agent/features/reports/domain/repository/reports_repository.dart';
@@ -43,6 +47,9 @@ void _dataSources() {
 
   inject.registerLazySingleton<ReportsDataSource>(
       () => ReportsDataSourceImpl(inject()));
+
+  inject.registerLazySingleton<ProfileDataSource>(
+      () => ProfileDataSourceImpl(inject()));
   // inject.registerLazySingleton<PrefManager>(() => PrefM);
 }
 
@@ -67,6 +74,9 @@ void _repositories() {
 
   inject.registerLazySingleton<ReportsRepository>(
       () => ReportsRepositoryImpl(inject()));
+
+  inject.registerLazySingleton<ProfileRepository>(
+      () => ProfileRepositoryImpl(inject()));
 }
 
 void _useCase() {
@@ -90,4 +100,5 @@ void _cubit() {
   inject.registerFactory(() => ContainerCubit(inject()));
   inject.registerFactory(() => PaymentCubit(inject(), inject()));
   inject.registerFactory(() => ReportsCubit(inject()));
+  inject.registerFactory(() => ProfileCubit(inject()));
 }

@@ -36,9 +36,9 @@
   "enterYourCardNumber": "Karta raqamingizni kiriting",
   "sendPaymentRequest": "Pul so'rovini so'rash",
   "expecting": "Kutilmoqda",
-  "date":"Sana",
+  "date": "Sana",
   "close": "Yopish",
-  "confirmed":"Tasdiqlangan",
+  "confirmed": "Tasdiqlangan",
   "cardholderFullName": "Karta egasining ism familiyasi",
   "createPaymentSuccess": "Toʻlov soʻrovi muvaffaqiyatli yaratildi",
   "serverError": "Server xatosi",
@@ -66,5 +66,13 @@
   "newPass": "Yangi parol",
   "confirmNewPass": "Yangi parolni tasdiqlash",
   "updatePass": "Parolni yangilash",
-  "cancel": "Bekor qilish"
+  "cancel": "Bekor qilish",
+  "updatePasswordSuccess": "Parol muvaffaqiyatli yangilandi",
+  "pending": "Kutilmoqda",
+  "approved": "Tasdiqlangan",
+  "rejected": "Rad etilgan",
+  "inWay": "Yo'lda",
+  "delivered": "Yetkazib berildi",
+  "bankAccount": "Balans bilan to'lash",
+  "card": "Karta bilan"
 }

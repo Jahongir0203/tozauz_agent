@@ -71,5 +71,13 @@ abstract class  LocaleKeys {
   static const confirmNewPass = 'confirmNewPass';
   static const updatePass = 'updatePass';
   static const cancel = 'cancel';
+  static const updatePasswordSuccess = 'updatePasswordSuccess';
+  static const pending = 'pending';
+  static const approved = 'approved';
+  static const rejected = 'rejected';
+  static const inWay = 'inWay';
+  static const delivered = 'delivered';
+  static const bankAccount = 'bankAccount';
+  static const card = 'card';
 
 }
