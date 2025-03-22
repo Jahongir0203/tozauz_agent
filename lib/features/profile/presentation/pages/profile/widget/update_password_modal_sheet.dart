@@ -35,7 +35,7 @@ class _UpdatePasswordModalSheetState extends State<UpdatePasswordModalSheet> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 900.h,
+      height: 550.h,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -79,7 +79,7 @@ class _UpdatePasswordModalSheetState extends State<UpdatePasswordModalSheet> {
             onTap: () {
               Navigator.pop(context);
             },
-            bgColor: AppColors.grey5,
+            bgColor: Theme.of(context).highlightColor,
           )
         ],
       ).paddingSymmetric(horizontal: 16.w),
