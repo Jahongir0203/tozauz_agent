@@ -74,5 +74,6 @@
   "inWay": "In Way",
   "delivered": "Delivered",
   "bankAccount": "Pay with balance",
-  "card": "With card"
+  "card": "With card",
+  "empty": "No reports yet"
 }

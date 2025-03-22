@@ -74,5 +74,7 @@
   "inWay": "Yo'lda",
   "delivered": "Yetkazib berildi",
   "bankAccount": "Balans bilan to'lash",
-  "card": "Karta bilan"
+  "card": "Karta bilan",
+  "empty": "Hali hech qanday hisobot yo'q"
+
 }

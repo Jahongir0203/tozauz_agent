@@ -67,18 +67,14 @@ class ReportsDataSourceImpl extends ReportsDataSource {
       {required AgentApplicationListRequest applicationRequest}) async {
     try {
       Response response = await _dioClient.get(
-        ListAPI.agentAppCreate,
+        ListAPI.agentApplicationList,
         queryParameters: {
-          if (applicationRequest.status != null)
-            "status": applicationRequest.status,
-          if (applicationRequest.employee != null)
-            "employee": applicationRequest.employee,
-          if (applicationRequest.box != null) "box": applicationRequest.box,
-          if (applicationRequest.paymentType != null)
-            "payment_type": applicationRequest.paymentType,
-          if (applicationRequest.page != null) "page": applicationRequest.page,
-          if (applicationRequest.pageSize != null)
-            "page_size": applicationRequest.pageSize
+          // "status": applicationRequest.status,
+          // "employee": applicationRequest.employee,
+          // "box": applicationRequest.box,
+          // "payment_type": applicationRequest.paymentType,
+          "page":applicationRequest.page,
+          "page_size":applicationRequest.pageSize
         },
         options: Options(
           headers: {

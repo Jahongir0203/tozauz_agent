@@ -1,13 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:tozauz_agent/core/extension/for_context.dart';
-import 'package:tozauz_agent/core/utils/locale_keys.g.dart';
 import 'package:tozauz_agent/export.dart';
 import 'package:tozauz_agent/features/common/widget/custom_drop_down.dart';
 import 'package:tozauz_agent/features/common/widget/text_field_widget.dart';
 import 'package:tozauz_agent/features/home/presentation/pages/widget/title_with_row.dart';
 import 'package:tozauz_agent/features/reports/presentation/cubit/reports_cubit/reports_cubit.dart';
-
-import '../../../common/widget/custom_delight.dart';
+import 'package:tozauz_agent/features/reports/presentation/pages/reports_history.dart';
 
 class ReportsScreen extends StatefulWidget {
   const ReportsScreen({super.key});
@@ -50,12 +48,12 @@ class _ReportsScreenState extends State<ReportsScreen>
           ],
         ),
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          BlocProvider(
-            create: (context) => inject<ReportsCubit>(),
-            child: BlocConsumer<ReportsCubit, ReportsState>(
+      body: BlocProvider(
+        create: (context) => inject<ReportsCubit>(),
+        child: TabBarView(
+          controller: _tabController,
+          children: [
+            BlocConsumer<ReportsCubit, ReportsState>(
               listener: (context, state) {
                 if (state.status == Status.SUCCESS) {
                   customDelightToastBar(
@@ -225,9 +223,9 @@ class _ReportsScreenState extends State<ReportsScreen>
                 );
               },
             ),
-          ),
-          Center(child: Text(LocaleKeys.reportsHistory.tr())),
-        ],
+            ReportsHistory(),
+          ],
+        ),
       ),
     );
   }

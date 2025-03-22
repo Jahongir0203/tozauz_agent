@@ -79,5 +79,6 @@ abstract class  LocaleKeys {
   static const delivered = 'delivered';
   static const bankAccount = 'bankAccount';
   static const card = 'card';
+  static const empty = 'empty';
 
 }

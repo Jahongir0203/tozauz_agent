@@ -23,6 +23,7 @@ class ListAPI {
   static const String userUpdatePassword = "v1/account/user-update-password/";//////
   static const String ecoPacketBoxesById = "v1/ecopacket/boxes/";
   static const String payMeList = "v1/bank/payme-list";
+  static const String agentApplicationList="v1/bank/agent-application-list/";
 
 /*
 post:

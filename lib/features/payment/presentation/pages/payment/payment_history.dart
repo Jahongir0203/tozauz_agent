@@ -26,11 +26,11 @@ class _PaymentHistoryState extends State<PaymentHistory> {
           },
           child: ListView.separated(
             itemBuilder: (context, index) {
-              var model = state.archivePaymentList?[index];
+              var model = state.archivePaymentList[index];
               return GestureDetector(
                 onTap: () {
                   PaymentHistoryBottomSheet(
-                    model: model!,
+                    model: model,
                   ).show(context);
                 },
                 child: DecoratedBox(
@@ -48,14 +48,14 @@ class _PaymentHistoryState extends State<PaymentHistory> {
                   child: Row(
                     children: [
                       Text(
-                        model?.card?.cardFormatter() ?? '',
+                        model.card?.cardFormatter() ?? '',
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Spacer(),
                       Column(
                         children: [
                           Text(
-                            "UZS ${model?.amount}",
+                            "UZS ${model.amount}",
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
                           DecoratedBox(
@@ -80,7 +80,7 @@ class _PaymentHistoryState extends State<PaymentHistory> {
             separatorBuilder: (context, index) {
               return customDivider;
             },
-            itemCount: state.archivePaymentList?.length??0,
+            itemCount: state.archivePaymentList.length??0,
           ),
         );
       },

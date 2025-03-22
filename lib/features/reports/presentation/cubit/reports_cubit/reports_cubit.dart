@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tozauz_agent/features/reports/data/model/agent_application_request.dart';
 import 'package:tozauz_agent/features/reports/data/model/agent_application_response.dart';
@@ -15,9 +16,32 @@ part 'reports_cubit.freezed.dart';
 class ReportsCubit extends Cubit<ReportsState> {
   ReportsCubit(this._repository) : super(const ReportsState());
   final ReportsRepository _repository;
-
-  int page = 0;
+  final ScrollController scrollController = ScrollController();
+  int page = 1;
   int pageSize = 10;
+
+  void initial() {
+    page = 1;
+    pageSize = 10;
+  }
+
+  void onScroll() {
+    scrollController.addListener(
+      () {
+        print('Scroll;${scrollController.positions}');
+        print('Max;${scrollController.position.maxScrollExtent}');
+        print('Pixels;${scrollController.position.pixels}');
+
+        if (scrollController.position.pixels >=
+            scrollController.position.maxScrollExtent - 20) {
+          if (state.applicationList?.count !=
+              state.applicationList?.results?.length) {
+            fetchMoreAgentApplicationList();
+          }
+        }
+      },
+    );
+  }
 
   Future<void> createAgentApplication(
       {String? comment,
@@ -42,8 +66,7 @@ class ReportsCubit extends Cubit<ReportsState> {
     );
   }
 
-  Future<void> fetchAgentApplicationList(
-      AgentApplicationListRequest applicationRequest) async {
+  Future<void> fetchAgentApplicationList() async {
     emit(state.copyWith(agentApplicationSt: Status.LOADING));
     final response = await _repository.fetchAgentApplicationList(
         applicationRequest:
@@ -62,8 +85,8 @@ class ReportsCubit extends Cubit<ReportsState> {
     );
   }
 
-  Future<void> fetchMoreAgentApplicationList(
-      AgentApplicationListRequest applicationRequest) async {
+  Future<void> fetchMoreAgentApplicationList() async {
+    page = page + 1;
     emit(state.copyWith(agentApplicationSt: Status.OTHER_LOADING));
     final response = await _repository.fetchAgentApplicationList(
         applicationRequest:
