@@ -75,5 +75,8 @@
   "delivered": "Delivered",
   "bankAccount": "Pay with balance",
   "card": "With card",
-  "empty": "No reports yet"
+  "empty": "No reports yet",
+  "reportDescription": "Report history details",
+  "paymentType": "Payment type:",
+  "container": "Container:"
 }

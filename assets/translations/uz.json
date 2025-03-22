@@ -75,6 +75,9 @@
   "delivered": "Yetkazib berildi",
   "bankAccount": "Balans bilan to'lash",
   "card": "Karta bilan",
-  "empty": "Hali hech qanday hisobot yo'q"
+  "empty": "Hali hech qanday hisobot yo'q",
+  "reportDescription": "Ariza tarixi tafsilotlari",
+  "paymentType": "To'lov turi:",
+  "container": "Konteyner:"
 
 }

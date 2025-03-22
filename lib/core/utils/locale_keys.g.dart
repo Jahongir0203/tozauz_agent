@@ -80,5 +80,8 @@ abstract class  LocaleKeys {
   static const bankAccount = 'bankAccount';
   static const card = 'card';
   static const empty = 'empty';
+  static const reportDescription = 'reportDescription';
+  static const paymentType = 'paymentType';
+  static const container = 'container';
 
 }

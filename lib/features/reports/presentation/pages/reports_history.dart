@@ -1,19 +1,34 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:tozauz_agent/core/utils/status_manager.dart';
+import 'package:tozauz_agent/features/reports/presentation/pages/part/reports_history_bottom_sheet.dart';
 
 import '../../../../core/utils/general_functions.dart';
 import '../../../../export.dart';
 import '../cubit/reports_cubit/reports_cubit.dart';
 
-class ReportsHistory extends StatelessWidget {
+class ReportsHistory extends StatefulWidget {
   const ReportsHistory({
     super.key,
   });
 
   @override
+  State<ReportsHistory> createState() => _ReportsHistoryState();
+}
+
+class _ReportsHistoryState extends State<ReportsHistory> {
+  @override
+  void dispose() {
+    context.read<ReportsCubit>().initial();
+    context.read<ReportsCubit>().scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<ReportsCubit, ReportsState>(
-      bloc: context.read<ReportsCubit>()..fetchAgentApplicationList()..onScroll(),
+      bloc: context.read<ReportsCubit>()
+        ..fetchAgentApplicationList()
+        ..onScroll(),
       builder: (context, state) {
         if (state.agentApplicationSt == Status.LOADING) {
           return LoadingWidget();
@@ -43,7 +58,11 @@ class ReportsHistory extends StatelessWidget {
                   );
                 } else {
                   return GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      ReportHistoryBottomSheet(
+                        results: results?[index],
+                      ).show(context);
+                    },
                     child: DecoratedBox(
                       decoration: BoxDecoration(
                           color: Theme.of(context).cardColor,
