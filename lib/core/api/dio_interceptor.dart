@@ -18,16 +18,16 @@ class MySmartDioInterceptor extends Interceptor {
     debugPrint('REQUEST[${options.method}] => PATH: ${options.path}');
 
     // _refresh = StorageService.to.getRefreshToken();
-    _token = _preferences.getString(ListAPI.ACCESS_TOKEN) ?? "";
+    _token = _preferences.getString(ListAPI.token) ?? "";
     _lang = _preferences.getString(ListAPI.LANG);
 
     options.headers['Content-Type'] = 'application/json';
     options.headers['Accept'] = 'application/json';
     // options.headers['accept-language'] = _lang ?? 'uz';
 
-    // if (_token.isNotEmpty) {
-    //   options.headers["Authorization"] = "Bearer $_token";
-    // }
+    if (_token.isNotEmpty) {
+      options.headers["Authorization"] = "Token $_token";
+    }
     debugPrint('REQUEST:${options.data}');
     handler.next(options);
   }

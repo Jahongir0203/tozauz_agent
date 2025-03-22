@@ -7,17 +7,22 @@ import 'package:tozauz_agent/features/common/domain/uscase/auth/login_usecase.da
 import 'package:tozauz_agent/features/common/domain/uscase/auth/logout.dart'
     show LogoutUseCase;
 
+import '../../../../export.dart';
+
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit(
     this._checkUserToAuthUseCase,
-    this._logoutUseCase, this.loginUseCase,
+    this._logoutUseCase,
+    this.loginUseCase,
+    this._preferences,
   ) : super(InitialState());
 
   final CheckUserToAuthUseCase _checkUserToAuthUseCase;
   final LogoutUseCase _logoutUseCase;
   final LoginUsecase loginUseCase;
+  final SharedPreferences _preferences;
 
   Future<void> checkUserToAuth() async {
     var result = await _checkUserToAuthUseCase.call(NoParams());
@@ -33,11 +38,12 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLoadingState());
     var result = await loginUseCase.call(LoginParams(username, password));
     result.fold((failure) => emit(UnAuthenticatedState()), (response) {
-      emit(
-        response.role == "AGENT"
-            ? AuthenticatedState()
-            : UnAuthenticatedState(),
-      );
+      if (response.role == "AGENT") {
+        _preferences.setString(ListAPI.token, response.token ?? '');
+        emit(AuthenticatedState());
+      } else {
+        emit(UnAuthenticatedState());
+      }
     });
   }
 

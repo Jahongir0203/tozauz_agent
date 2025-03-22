@@ -23,11 +23,11 @@ class ContainerDataSourceImpl implements ContainerDataSource {
     try {
       Response response = await dioClient.get(
         ListAPI.boxes,
-          options: Options(
-              headers: {
-                "Authorization":"Token 3ccaf710b1cf1d53c27a0c54f31b67a94350f4f5"
-              }
-          )
+          // options: Options(
+          //     headers: {
+          //       "Authorization":"Token 3ccaf710b1cf1d53c27a0c54f31b67a94350f4f5"
+          //     }
+          // )
       );
 
       if (response.statusCode == 200) {
@@ -68,11 +68,11 @@ class ContainerDataSourceImpl implements ContainerDataSource {
     try {
       Response response = await dioClient.get(
         ListAPI.archivePayment,
-          options: Options(
-              headers: {
-                "Authorization":"Token 3ccaf710b1cf1d53c27a0c54f31b67a94350f4f5"
-              }
-          )
+          // options: Options(
+          //     headers: {
+          //       "Authorization":"Token 3ccaf710b1cf1d53c27a0c54f31b67a94350f4f5"
+          //     }
+          // )
       );
 
       if (response.statusCode == 200) {
@@ -112,11 +112,11 @@ class ContainerDataSourceImpl implements ContainerDataSource {
     try {
       Response response = await dioClient.get(
         ListAPI.meBank,
-          options: Options(
-              headers: {
-                "Authorization":"Token 3ccaf710b1cf1d53c27a0c54f31b67a94350f4f5"
-              }
-          )
+          // options: Options(
+          //     headers: {
+          //       "Authorization":"Token 3ccaf710b1cf1d53c27a0c54f31b67a94350f4f5"
+          //     }
+          // )
       );
 
       if (response.statusCode == 200) {
@@ -162,11 +162,11 @@ class ContainerDataSourceImpl implements ContainerDataSource {
           if(filter != null && filter.endDate != null) "end_date": filter.endDate,
         },
         ListAPI.agentEarnings,
-        options: Options(
-          headers: {
-            "Authorization":"Token 3ccaf710b1cf1d53c27a0c54f31b67a94350f4f5"
-          }
-        )
+        // options: Options(
+        //   headers: {
+        //     "Authorization":"Token 3ccaf710b1cf1d53c27a0c54f31b67a94350f4f5"
+        //   }
+        // )
       );
 
       if (response.statusCode == 200) {

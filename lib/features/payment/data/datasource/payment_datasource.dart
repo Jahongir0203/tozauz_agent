@@ -19,19 +19,22 @@ class PaymentDataSourceImpl extends PaymentDatSource {
   Future<Either<Failure, ArchivePaymentResponse>> createPayment(
       {required ArchivePaymentResponse archivePayment}) async {
     try {
-      Response response = await _dioClient.post(ListAPI.agentPayMeCreate,
-          data: {
-              "amount": archivePayment.amount,
-              "card": archivePayment.card,
-              "card_name": archivePayment.cardName
-
-          },
-          options: Options(headers: {
-            "Authorization": "Token 3ccaf710b1cf1d53c27a0c54f31b67a94350f4f5"
-          }));
+      Response response = await _dioClient.post(
+        ListAPI.agentPayMeCreate,
+        data: {
+          "amount": archivePayment.amount,
+          "card": archivePayment.card,
+          "card_name": archivePayment.cardName
+        },
+        // options: Options(
+        //   headers: {
+        //     "Authorization": "Token 3ccaf710b1cf1d53c27a0c54f31b67a94350f4f5"
+        //   },
+        // ),
+      );
       if (response.statusCode == 201) {
         return Right(ArchivePaymentResponse.fromJson(response.data));
-      }else{
+      } else {
         return Left(ServerFailure(response.statusCode));
       }
     } on DioException catch (e) {

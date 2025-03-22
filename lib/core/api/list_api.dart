@@ -9,6 +9,7 @@ class ListAPI {
   static const String themeIsSystem = 'themeIsSystem';
   static const String theme = 'theme';
   static const String userID = 'userID';
+  static const String token = "Token";
 
   /// News
 
@@ -19,26 +20,9 @@ class ListAPI {
   static const String archivePayment = 'v1/bank/agent/payme/list/';
 
   static const String agentAppCreate = "v1/bank/agent-application-create/";
-  static const String agentPayMeCreate = "v1/bank/agent/payme/create/";/////////
-  static const String userUpdatePassword = "v1/account/user-update-password/";//////
+  static const String agentPayMeCreate = "v1/bank/agent/payme/create/";
+  static const String userUpdatePassword = "v1/account/user-update-password/";
   static const String ecoPacketBoxesById = "v1/ecopacket/boxes/";
   static const String payMeList = "v1/bank/payme-list";
-  static const String agentApplicationList="v1/bank/agent-application-list/";
-
-/*
-post:
- /account/api-token-auth/ ✅
- /bank/agent-application-create/
- /bank/agent/payme/create/
- /account/user-update-password/
-
-get:
-/bank/me-bank/ ✅
-/bank/agent-application-list/ ✅
-/ecopacket/agent/boxes/
-/bank/agent-earning-list/ ✅
-/ecopacket/boxes/${id}
-/bank/agent/payme/list/ ✅️️️️
-bank/payme-list
- */
+  static const String agentApplicationList = "v1/bank/agent-application-list/";
 }

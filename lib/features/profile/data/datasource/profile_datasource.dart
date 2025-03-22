@@ -17,14 +17,18 @@ class ProfileDataSourceImpl extends ProfileDataSource {
   Future<Either<Failure, SuccessResponse>> updatePassword(
       {required UpdatePasswordRequest updatePasswordRequest}) async {
     try {
-      Response response = await _dioClient.post(ListAPI.userUpdatePassword,
-          data: {
-            "old_password": updatePasswordRequest.oldPassword,
-            "new_password": updatePasswordRequest.newPassword
-          },
-          options: Options(headers: {
-            "Authorization": "Token 3ccaf710b1cf1d53c27a0c54f31b67a94350f4f5"
-          }));
+      Response response = await _dioClient.post(
+        ListAPI.userUpdatePassword,
+        data: {
+          "old_password": updatePasswordRequest.oldPassword,
+          "new_password": updatePasswordRequest.newPassword
+        },
+        // options: Options(
+        //   headers: {
+        //     "Authorization": "Token 3ccaf710b1cf1d53c27a0c54f31b67a94350f4f5"
+        //   },
+        // ),
+      );
       if (response.statusCode == 201) {
         return Right(SuccessResponse.fromJson(response.data));
       } else {

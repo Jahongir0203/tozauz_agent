@@ -25,17 +25,21 @@ class ReportsDataSourceImpl extends ReportsDataSource {
   Future<Either<Failure, AgentApplicationResponse>> createAgentApplication(
       {required AgentApplicationResponse agentApplication}) async {
     try {
-      Response response = await _dioClient.post(ListAPI.agentAppCreate,
-          data: {
-            'box': agentApplication.box,
-            if (agentApplication.comment != null)
-              'comment': agentApplication.comment,
-            'containers_count': agentApplication.containersCount,
-            'payment_type': agentApplication.paymentType
-          },
-          options: Options(headers: {
-            "Authorization": "Token 3ccaf710b1cf1d53c27a0c54f31b67a94350f4f5"
-          }));
+      Response response = await _dioClient.post(
+        ListAPI.agentAppCreate,
+        data: {
+          'box': agentApplication.box,
+          if (agentApplication.comment != null)
+            'comment': agentApplication.comment,
+          'containers_count': agentApplication.containersCount,
+          'payment_type': agentApplication.paymentType
+        },
+        // options: Options(
+        //   headers: {
+        //     "Authorization": "Token 3ccaf710b1cf1d53c27a0c54f31b67a94350f4f5"
+        //   },
+        // ),
+      );
       if (response.statusCode == 201) {
         return Right(AgentApplicationResponse.fromJson(response.data));
       } else {
@@ -73,14 +77,14 @@ class ReportsDataSourceImpl extends ReportsDataSource {
           // "employee": applicationRequest.employee,
           // "box": applicationRequest.box,
           // "payment_type": applicationRequest.paymentType,
-          "page":applicationRequest.page,
-          "page_size":applicationRequest.pageSize
+          "page": applicationRequest.page,
+          "page_size": applicationRequest.pageSize
         },
-        options: Options(
-          headers: {
-            "Authorization": "Token 3ccaf710b1cf1d53c27a0c54f31b67a94350f4f5"
-          },
-        ),
+        // options: Options(
+        //   headers: {
+        //     "Authorization": "Token 3ccaf710b1cf1d53c27a0c54f31b67a94350f4f5"
+        //   },
+        // ),
       );
       if (response.statusCode == 200) {
         return Right(AgentApplicationList.fromJson(response.data));

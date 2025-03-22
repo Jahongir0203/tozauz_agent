@@ -94,6 +94,7 @@ void _cubit() {
       inject(),
       inject(),
       inject(),
+      inject()
     ),
   );
 

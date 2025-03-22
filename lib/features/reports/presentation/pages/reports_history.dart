@@ -6,22 +6,10 @@ import '../../../../core/utils/general_functions.dart';
 import '../../../../export.dart';
 import '../cubit/reports_cubit/reports_cubit.dart';
 
-class ReportsHistory extends StatefulWidget {
+class ReportsHistory extends StatelessWidget {
   const ReportsHistory({
     super.key,
   });
-
-  @override
-  State<ReportsHistory> createState() => _ReportsHistoryState();
-}
-
-class _ReportsHistoryState extends State<ReportsHistory> {
-  @override
-  void dispose() {
-    context.read<ReportsCubit>().initial();
-    context.read<ReportsCubit>().scrollController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

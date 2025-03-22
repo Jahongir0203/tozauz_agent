@@ -9,13 +9,19 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  late SharedPreferences sharedPreferences;
+
+  String token = '';
+
   @override
   void initState() {
+    initShared();
     var connectivity = Connectivity();
 
     Future.delayed(const Duration(seconds: 2), () async {
       final doubleCheck = await connectivity.checkConnectivity();
-      Navigator.pushReplacementNamed(context, AppRoutes.mainScreen);
+      Navigator.pushReplacementNamed(context,
+          token.isNotEmpty ? AppRoutes.mainScreen : AppRoutes.loginScreen);
       //
       // if (mounted) {
       //   // Ensure the widget is still in the tree
@@ -28,6 +34,11 @@ class _SplashScreenState extends State<SplashScreen> {
       // }
     });
     super.initState();
+  }
+
+  Future initShared() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    token = sharedPreferences.getString(ListAPI.token) ?? '';
   }
 
   @override
